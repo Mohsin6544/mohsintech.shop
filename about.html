@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - My Blog</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body, html {
+            height: 100%;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        body {
+            background: linear-gradient(45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            color: white;
+            position: relative;
+            padding-top: 90px; /* Space for fixed navbar */
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* Navigation styles */
+        .nav-container {
+            width: 100%;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6, #d946ef);
+            background-size: 300% 300%;
+            animation: gradientBG 15s ease infinite;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 15px 20px;
+            position: relative;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            position: relative;
+            z-index: 10;
+        }
+
+        .logo {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(45deg, #00f2fe, #4facfe);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+            font-size: 20px;
+            text-transform: uppercase;
+        }
+
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            margin-right: 20px;
+        }
+
+        .nav-links li {
+            margin: 0 5px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 14px;
+            border-radius: 10px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            opacity: 0.85;
+        }
+
+        .nav-links a:hover {
+            opacity: 1;
+            transform: translateY(-3px);
+        }
+
+        .nav-links a.active {
+            opacity: 1;
+            background-color: rgba(255, 255, 255, 0.15);
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        /* Particle Background Effect */
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            top: 0;
+            left: 0;
+        }
+
+        .page-wrapper {
+            position: relative;
+            z-index: 1;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Heading Styles */
+        .main-heading {
+            text-align: center;
+            font-size: 4rem;
+            margin-bottom: 30px;
+            color: white;
+            text-shadow: 0 0 20px rgba(0,0,0,0.3);
+            animation: float 4s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+
+        /* Section Styles */
+        .section-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .section-card {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.5s ease;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+        }
+
+        .section-card:hover {
+            transform: scale(1.05) rotateX(10deg);
+            box-shadow: 0 25px 45px rgba(0,0,0,0.3);
+        }
+
+        .section-card h2 {
+            margin-bottom: 15px;
+            color: white;
+            font-size: 1.8rem;
+        }
+
+        .section-card p {
+            color: rgba(255,255,255,0.8);
+            line-height: 1.6;
+        }
+
+        .section-icon {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            opacity: 0.8;
+            transition: transform 0.3s ease;
+        }
+
+        .section-card:hover .section-icon {
+            transform: scale(1.2) rotate(15deg);
+        }
+
+        /* Team Section */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .team-member {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 20px;
+            text-align: center;
+            transition: all 0.5s ease;
+        }
+
+        .team-member img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid rgba(255,255,255,0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .team-member:hover img {
+            transform: rotate(360deg);
+        }
+
+        .team-member h3 {
+            margin: 15px 0 5px;
+            color: white;
+        }
+
+        .team-member p {
+            color: rgba(255,255,255,0.7);
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: rgba(255,255,255,0.1);
+            color: white;
+            margin-top: 30px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1000px) {
+            .section-container {
+                grid-template-columns: 1fr;
+            }
+
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-links {
+                display: none;
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 280px;
+                height: 100vh;
+                background: linear-gradient(135deg, #6366f1, #8b5cf6, #d946ef);
+                flex-direction: column;
+                align-items: center;
+                padding: 80px 0 30px;
+                box-shadow: -5px 0 25px rgba(0, 0, 0, 0.15);
+                transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+                z-index: 100;
+            }
+
+            .nav-links.active {
+                display: flex;
+                right: 0;
+            }
+
+            .menu-toggle {
+                display: block;
+                position: relative;
+                z-index: 101;
+            }
+
+            .nav-links li {
+                width: 80%;
+                margin: 8px 0;
+            }
+
+            .nav-links a {
+                display: block;
+                text-align: center;
+                width: 100%;
+                padding: 12px 20px;
+            }
+
+            .main-heading {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <div class="nav-container">
+        <div class="nav-content">
+            <div class="logo-container">
+                <div class="logo">MB</div>
+            </div>
+            
+            <div class="nav-menu">
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="home.html">Home</a></li>
+                    <li><a href="explore.html">Explore</a></li>
+                    <li><a href="create.html">Create</a></li>
+                    <li><a href="search.html">Search</a></li>
+                    <li><a href="edit.html">Edit</a></li>
+                    <li><a href="all.html">Blogs</a></li>
+                    <li><a href="about.html" class="active">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="privacy.html">Privacy</a></li>
+                </ul>
+                
+                <button class="menu-toggle" id="menuToggle">☰</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Particles Background Container -->
+    <div id="particles-js"></div>
+
+    <div class="page-wrapper">
+        <h1 class="main-heading">My Blog Journey</h1>
+
+        <div class="section-container">
+            <div class="section-card">
+                <div class="section-icon">🌟</div>
+                <h2>Our Story</h2>
+                <p>A passionate journey of sharing knowledge, transforming from a small project to a global platform that inspires and connects thousands of readers worldwide.</p>
+            </div>
+
+            <div class="section-card">
+                <div class="section-icon">🎯</div>
+                <h2>Our Mission</h2>
+                <p>Breaking down complex ideas, making knowledge accessible, and creating a vibrant community of learners who are curious, creative, and constantly evolving.</p>
+            </div>
+
+            <div class="section-card">
+                <div class="section-icon">💡</div>
+                <h2>Our Vision</h2>
+                <p>To become a leading digital platform that empowers individuals through insightful content, fostering learning, growth, and meaningful connections.</p>
+            </div>
+        </div>
+
+        <div class="section-container">
+            <div class="section-card">
+                <h2>Our Team</h2>
+                <div class="team-grid">
+                    <div class="team-member">
+                        <img src="/api/placeholder/200/200" alt="Sarah Johnson">
+                        <h3>Sarah Johnson</h3>
+                        <p>Founder & Chief Editor</p>
+                    </div>
+                    <div class="team-member">
+                        <img src="/api/placeholder/200/200" alt="Alex Rodriguez">
+                        <h3>Alex Rodriguez</h3>
+                        <p>Content Strategy Lead</p>
+                    </div>
+                    <div class="team-member">
+                        <img src="/api/placeholder/200/200" alt="Emma Chen">
+                        <h3>Emma Chen</h3>
+                        <p>Creative Director</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-card">
+                <h2>Core Values</h2>
+                <ul style="list-style-type: none; padding: 0;">
+                    <li style="margin: 10px 0; color: rgba(255,255,255,0.8);">🌈 Authenticity</li>
+                    <li style="margin: 10px 0; color: rgba(255,255,255,0.8);">📚 Continuous Learning</li>
+                    <li style="margin: 10px 0; color: rgba(255,255,255,0.8);">🤝 Community Engagement</li>
+                    <li style="margin: 10px 0; color: rgba(255,255,255,0.8);">🚀 Creativity</li>
+                    <li style="margin: 10px 0; color: rgba(255,255,255,0.8);">🛡️ Integrity</li>
+                </ul>
+            </div>
+
+            <div class="section-card">
+                <div class="section-icon">🌍</div>
+                <h2>Global Reach</h2>
+                <p>Connecting minds across continents, our blog transcends geographical boundaries, bringing together diverse perspectives and unique insights.</p>
+            </div>
+        </div>
+    </div>
+<div id="feaa"></div>
+
+    <!-- Particle.js Library -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+
+    <script>
+
+// Load footer
+    fetch('f1.html')
+      .then(res => res.text())
+      .then(data => {
+        document.getElementById('feaa').innerHTML = data;
+      });
+
+
+    document.addEventListener('DOMContentLoaded', function() {
+    // Mobile Menu Toggle
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+    
+    menuToggle.addEventListener('click', function() {
+        navLinks.classList.toggle('active');
+        
+        // Toggle menu icon
+        this.innerHTML = navLinks.classList.contains('active') ? '✕' : '☰';
+    });
+
+    // Close menu when a link is clicked
+    document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', () => {
+            navLinks.classList.remove('active');
+            menuToggle.innerHTML = '☰';
+        });
+    });
+
+    // Particle.js Configuration
+    particlesJS('particles-js', {
+        particles: {
+            number: { value: 80, density: { enable: true, value_area: 800 } },
+            color: { value: '#ffffff' },
+            shape: { 
+                type: 'circle',
+                stroke: { width: 0, color: '#000000' },
+                polygon: { nb_sides: 5 }
+            },
+            opacity: {
+                value: 0.5,
+                random: false,
+                anim: { enable: false, speed: 1, opacity_min: 0.1, sync: false }
+            },
+            size: {
+                value: 3,
+                random: true,
+                anim: { enable: false, speed: 40, size_min: 0.1, sync: false }
+            },
+            line_linked: {
+                enable: true,
+                distance: 150,
+                color: '#ffffff',
+                opacity: 0.4,
+                width: 1
+            },
+            move: {
+                enable: true,
+                speed: 6,
+                direction: 'none',
+                random: false,
+                straight: false,
+                out_mode: 'out',
+                bounce: false,
+                attract: { enable: false, rotateX: 600, rotateY: 1200 }
+            }
+        },
+        interactivity: {
+            detect_on: 'canvas',
+            events: {
+                onhover: { enable: true, mode: 'repulse' },
+                onclick: { enable: true, mode: 'push' },
+                resize: true
+            },
+            modes: {
+                grab: { distance: 400, line_linked: { opacity: 1 } },
+                bubble: { distance: 400, size: 40, duration: 2, opacity: 8, speed: 3 },
+                repulse: { distance: 200, duration: 0.4 },
+                push: { particles_nb: 4 },
+                remove: { particles_nb: 2 }
+            }
+        },
+        retina_detect: true
+    });
+});  
+
+</script>
+
+</body>
+
+</html>

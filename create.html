@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Blog Post</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background-color: #f8f9fa;
+            padding-top: 90px; /* Space for fixed navbar */
+            line-height: 1.6;
+        }
+
+        /* Navigation styles from the previous file */
+        .nav-container {
+            width: 100%;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6, #d946ef);
+            background-size: 300% 300%;
+            animation: gradientBG 15s ease infinite;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+        }
+        
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 15px 20px;
+            position: relative;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .logo {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(45deg, #00f2fe, #4facfe);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+            font-size: 20px;
+            text-transform: uppercase;
+        }
+        
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            margin-right: 20px;
+        }
+        
+        .nav-links li {
+            margin: 0 5px;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 14px;
+            border-radius: 10px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            opacity: 0.85;
+        }
+        
+        .nav-links a:hover {
+            opacity: 1;
+            transform: translateY(-3px);
+        }
+        
+        .nav-links a.active {
+            opacity: 1;
+            background-color: rgba(255, 255, 255, 0.15);
+        }
+        
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        /* Create Blog Form Styles */
+        .create-container {
+            max-width: 600px;
+            margin: 30px auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .create-container h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        textarea {
+            height: 200px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 12px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .submit-btn:hover {
+            background-color: #45a049;
+        }
+
+        .tags-container {
+            border: 1px solid #ddd;
+            padding: 10px;
+            border-radius: 4px;
+            min-height: 50px;
+        }
+
+        .tag {
+            display: inline-block;
+            background-color: #f1f1f1;
+            padding: 5px 10px;
+            margin: 5px;
+            border-radius: 20px;
+        }
+
+        .tag-close {
+            margin-left: 10px;
+            color: red;
+            cursor: pointer;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1000px) {
+            .nav-links {
+                display: none;
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 280px;
+                height: 100vh;
+                background: linear-gradient(135deg, #6366f1, #8b5cf6, #d946ef);
+                flex-direction: column;
+                align-items: center;
+                padding: 80px 0 30px;
+                box-shadow: -5px 0 25px rgba(0, 0, 0, 0.15);
+                transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+                z-index: 100;
+            }
+
+            .nav-links.active {
+                display: flex;
+                right: 0;
+            }
+
+            .menu-toggle {
+                display: block;
+                position: relative;
+                z-index: 101;
+            }
+
+            .nav-links li {
+                width: 80%;
+                margin: 8px 0;
+            }
+
+            .nav-links a {
+                display: block;
+                text-align: center;
+                width: 100%;
+                padding: 12px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <div class="nav-container">
+        <div class="nav-content">
+            <div class="logo-container">
+                <div class="logo">MB</div>
+            </div>
+            
+            <div class="nav-menu">
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="home.html">Home</a></li>
+                    <li><a href="explore.html">Explore</a></li>
+                    <li><a href="create.html" class="active">Create</a></li>
+                    <li><a href="search.html">Search</a></li>
+                    <li><a href="edit.html">Edit</a></li>
+                    <li><a href="all.html">Blogs</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="privacy.html">Privacy</a></li>
+                </ul>
+                
+                <button class="menu-toggle" id="menuToggle">☰</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="create-container">
+        <h1>Create New Blog Post</h1>
+        <form id="blogPostForm">
+            <div class="form-group">
+                <label for="title">Blog Title</label>
+                <input type="text" id="title" required placeholder="Enter blog title">
+            </div>
+
+            <div class="form-group">
+                <label for="category">Category</label>
+                <select id="category" required>
+                    <option value="">Select a category</option>
+                    <option value="tech">Technology</option>
+                    <option value="lifestyle">Lifestyle</option>
+                    <option value="education">Education</option>
+                    <option value="health">Health</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="readTime">Estimated Reading Time (minutes)</label>
+                <input type="number" id="readTime" min="1" max="60" required placeholder="Reading time in minutes">
+            </div>
+
+            <div class="form-group">
+                <label for="tags">Tags</label>
+                <input type="text" id="tagInput" placeholder="Type a tag and press Enter">
+                <div id="tagsContainer" class="tags-container"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="content">Blog Content</label>
+                <textarea id="content" required placeholder="Write your blog post here..."></textarea>
+            </div>
+
+            <button type="submit" class="submit-btn">Publish Blog Post</button>
+        </form>
+    </div>
+
+    <div id="feaa"></div>
+
+    <script>
+
+    // Load footer
+    fetch('f1.html')
+      .then(res => res.text())
+      .then(data => {
+        document.getElementById('feaa').innerHTML = data;
+      });
+
+
+        // Mobile Menu Toggle
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuToggle = document.getElementById('menuToggle');
+            const navLinks = document.getElementById('navLinks');
+            
+            menuToggle.addEventListener('click', function() {
+                navLinks.classList.toggle('active');
+                
+                // Toggle menu icon
+                this.innerHTML = navLinks.classList.contains('active') ? '✕' : '☰';
+            });
+
+            // Close menu when a link is clicked
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navLinks.classList.remove('active');
+                    menuToggle.innerHTML = '☰';
+                });
+            });
+        });
+
+        // Tag Management
+        const tagInput = document.getElementById('tagInput');
+        const tagsContainer = document.getElementById('tagsContainer');
+        const tags = [];
+
+        tagInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                const tagValue = this.value.trim();
+                
+                if (tagValue && !tags.includes(tagValue)) {
+                    // Add tag to array
+                    tags.push(tagValue);
+                    
+                    // Create tag element
+                    const tagElement = document.createElement('span');
+                    tagElement.className = 'tag';
+                    tagElement.innerHTML = `${tagValue} 
+                        <span class="tag-close" onclick="removeTag(this)">×</span>`;
+                    
+                    // Add to container
+                    tagsContainer.appendChild(tagElement);
+                    
+                    // Clear input
+                    this.value = '';
+                }
+            }
+        });
+
+        function removeTag(closeBtn) {
+            const tagElement = closeBtn.parentElement;
+            const tagText = tagElement.textContent.trim().replace('×', '');
+            
+            // Remove from tags array
+            const index = tags.indexOf(tagText);
+            if (index > -1) {
+                tags.splice(index, 1);
+            }
+            
+            // Remove from DOM
+            tagsContainer.removeChild(tagElement);
+        }
+
+        // Form Submission
+        document.getElementById('blogPostForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Collect form data
+            const formData = {
+                title: document.getElementById('title').value,
+                category: document.getElementById('category').value,
+                readTime: document.getElementById('readTime').value,
+                tags: tags,
+                content: document.getElementById('content').value
+            };
+            
+            // In a real app, you'd send this to a server
+            console.log('Blog Post Data:', formData);
+            alert('Blog post submitted! Check console for details.');
+            
+            // Optional: Reset form
+            this.reset();
+            tagsContainer.innerHTML = '';
+            tags.length = 0;
+        });
+    </script>
+</body>
+</html>

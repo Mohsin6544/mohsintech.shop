@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Blog Posts</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background-color: #f8f9fa;
+            padding-top: 90px; /* Space for fixed navbar */
+            line-height: 1.6;
+        }
+
+        /* Navigation styles from the previous file */
+        .nav-container {
+            width: 100%;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6, #d946ef);
+            background-size: 300% 300%;
+            animation: gradientBG 15s ease infinite;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+        }
+        
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 15px 20px;
+            position: relative;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .logo {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(45deg, #00f2fe, #4facfe);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+            font-size: 20px;
+            text-transform: uppercase;
+        }
+        
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            margin-right: 20px;
+        }
+        
+        .nav-links li {
+            margin: 0 5px;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 14px;
+            border-radius: 10px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            opacity: 0.85;
+        }
+        
+        .nav-links a:hover {
+            opacity: 1;
+            transform: translateY(-3px);
+        }
+        
+        .nav-links a.active {
+            opacity: 1;
+            background-color: rgba(255, 255, 255, 0.15);
+        }
+        
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        /* All Blogs Page Styles */
+        .blogs-container {
+            max-width: 1000px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #333;
+        }
+
+        .blogs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .blog-card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .blog-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .blog-content {
+            padding: 20px;
+        }
+
+        .blog-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #4f46e5;
+            margin-bottom: 10px;
+            cursor: pointer;
+        }
+
+        .blog-meta {
+            display: flex;
+            justify-content: space-between;
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+
+        .blog-excerpt {
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .blog-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+
+        .blog-tag {
+            background-color: #f1f1f1;
+            color: #666;
+            padding: 3px 8px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        .pagination-btn {
+            background-color: #f1f1f1;
+            border: none;
+            padding: 10px 15px;
+            margin: 0 5px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .pagination-btn:hover {
+            background-color: #e1e1e1;
+        }
+
+        .pagination-btn.active {
+            background-color: #6366f1;
+            color: white;
+        }
+
+        /* Category Filter */
+        .category-filter {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .category-btn {
+            background-color: #f1f1f1;
+            border: none;
+            padding: 10px 15px;
+            margin: 5px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .category-btn:hover, .category-btn.active {
+            background-color: #6366f1;
+            color: white;
+        }
+
+        /* Hidden Blog Cards */
+        .blog-card.hidden {
+            display: none;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1000px) {
+            .nav-links {
+                display: none;
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 280px;
+                height: 100vh;
+                background: linear-gradient(135deg, #6366f1, #8b5cf6, #d946ef);
+                flex-direction: column;
+                align-items: center;
+                padding: 80px 0 30px;
+                box-shadow: -5px 0 25px rgba(0, 0, 0, 0.15);
+                transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+                z-index: 100;
+            }
+
+            .nav-links.active {
+                display: flex;
+                right: 0;
+            }
+
+            .menu-toggle {
+                display: block;
+                position: relative;
+                z-index: 101;
+            }
+
+            .nav-links li {
+                width: 80%;
+                margin: 8px 0;
+            }
+
+            .nav-links a {
+                display: block;
+                text-align: center;
+                width: 100%;
+                padding: 12px 20px;
+            }
+
+            .blogs-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .category-filter {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .category-btn {
+                width: 80%;
+                margin: 5px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <div class="nav-container">
+        <div class="nav-content">
+            <div class="logo-container">
+                <div class="logo">MB</div>
+            </div>
+            
+            <div class="nav-menu">
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="home.html">Home</a></li>
+                    <li><a href="explore.html">Explore</a></li>
+                    <li><a href="create.html">Create</a></li>
+                    <li><a href="search.html">Search</a></li>
+                    <li><a href="edit.html">Edit</a></li>
+                    <li><a href="all.html" class="active">Blogs</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="privacy.html">Privacy</a></li>
+                </ul>
+                
+                <button class="menu-toggle" id="menuToggle">☰</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="blogs-container">
+        <h1 class="page-header">All Blog Posts</h1>
+
+        <!-- Category Filter -->
+        <div class="category-filter">
+            <button class="category-btn active" data-category="all">All</button>
+            <button class="category-btn" data-category="technology">Technology</button>
+            <button class="category-btn" data-category="lifestyle">Lifestyle</button>
+            <button class="category-btn" data-category="health">Health</button>
+            <button class="category-btn" data-category="education">Education</button>
+        </div>
+
+        <!-- Blogs Grid -->
+        <div class="blogs-grid">
+            <!-- Blog Card 1 -->
+            <div class="blog-card" data-category="technology">
+                <img src="/api/placeholder/400/200" alt="Blog Thumbnail" class="blog-image">
+                <div class="blog-content">
+                    <h2 class="blog-title">How to Master Web Development in 2025</h2>
+                    <div class="blog-meta">
+                        <span>10 min read</span>
+                        <span>May 10, 2025</span>
+                    </div>
+                    <p class="blog-excerpt">The complete guide to becoming a web developer in 2025, covering the most in-demand technologies and skills...</p>
+                    <div class="blog-tags">
+                        <span class="blog-tag">web development</span>
+                        <span class="blog-tag">programming</span>
+                        <span class="blog-tag">careers</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Blog Card 2 -->
+            <div class="blog-card" data-category="technology">
+                <img src="/api/placeholder/400/200" alt="Blog Thumbnail" class="blog-image">
+                <div class="blog-content">
+                    <h2 class="blog-title">The Future of Mobile Apps: Trends to Watch</h2>
+                    <div class="blog-meta">
+                        <span>7 min read</span>
+                        <span>May 8, 2025</span>
+                    </div>
+                    <p class="blog-excerpt">Exploring the latest trends in mobile app development and what to expect in the coming years...</p>
+                    <div class="blog-tags">
+                        <span class="blog-tag">mobile apps</span>
+                        <span class="blog-tag">tech trends</span>
+                        <span class="blog-tag">development</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Blog Card 3 -->
+            <div class="blog-card" data-category="health">
+                <img src="/api/placeholder/400/200" alt="Blog Thumbnail" class="blog-image">
+                <div class="blog-content">
+                    <h2 class="blog-title">5 Meditation Techniques for Busy Professionals</h2>
+                    <div class="blog-meta">
+                        <span>5 min read</span>
+                        <span>May 5, 2025</span>
+                    </div>
+                    <p class="blog-excerpt">Quick and effective meditation practices that can be incorporated into even the busiest schedules...</p>
+                    <div class="blog-tags">
+                        <span class="blog-tag">meditation</span>
+                        <span class="blog-tag">mindfulness</span>
+                        <span class="blog-tag">stress relief</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Blog Card 4 -->
+            <div class="blog-card" data-category="lifestyle">
+                <img src="/api/placeholder/400/200" alt="Blog Thumbnail" class="blog-image">
+                <div class="blog-content">
+                    <h2 class="blog-title">Minimalist Living: Simplify Your Life</h2>
+                    <div class="blog-meta">
+                        <span>8 min read</span>
+                        <span>May 3, 2025</span>
+                    </div>
+                    <p class="blog-excerpt">Practical tips and strategies to embrace minimalism and reduce stress in your daily life...</p>
+                    <div class="blog-tags">
+                        <span class="blog-tag">minimalism</span>
+                        <span class="blog-tag">lifestyle</span>
+                        <span class="blog-tag">productivity</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Blog Card 5 -->
+            <div class="blog-card" data-category="education">
+                <img src="/api/placeholder/400/200" alt="Blog Thumbnail" class="blog-image">
+                <div class="blog-content">
+                    <h2 class="blog-title">Online Learning: Strategies for Success</h2>
+                    <div class="blog-meta">
+                        <span>6 min read</span>
+                        <span>April 28, 2025</span>
+                    </div>
+                    <p class="blog-excerpt">Effective techniques to maximize your learning potential in online educational environments...</p>
+                    <div class="blog-tags">
+                        <span class="blog-tag">online learning</span>
+                        <span class="blog-tag">education</span>
+                        <span class="blog-tag">skill development</span>
+                    </div>
+                </div>
+            </div
+
+
+            <!-- Blog Card 6 -->
+            <div class="blog-card" data-category="health">
+                <img src="/api/placeholder/400/200" alt="Blog Thumbnail" class="blog-image">
+                <div class="blog-content">
+                    <h2 class="blog-title">Nutrition for Mental Clarity and Focus</h2>
+                    <div class="blog-meta">
+                        <span>9 min read</span>
+                        <span>April 25, 2025</span>
+                    </div>
+                    <p class="blog-excerpt">Discover the best foods and dietary habits to enhance cognitive function and mental performance...</p>
+                    <div class="blog-tags">
+                        <span class="blog-tag">nutrition</span>
+                        <span class="blog-tag">mental health</span>
+                        <span class="blog-tag">wellness</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pagination (Optional) -->
+        <div class="pagination">
+            <button class="pagination-btn active">1</button>
+            <button class="pagination-btn">2</button>
+            <button class="pagination-btn">3</button>
+            <button class="pagination-btn">Next</button>
+        </div>
+    </div>
+
+     <div id="feaa"></div>
+
+    <script>
+
+// Load footer
+    fetch('f1.html')
+      .then(res => res.text())
+      .then(data => {
+        document.getElementById('feaa').innerHTML = data;
+      });
+
+
+        // Category Filtering
+        document.addEventListener('DOMContentLoaded', () => {
+            const categoryButtons = document.querySelectorAll('.category-btn');
+            const blogCards = document.querySelectorAll('.blog-card');
+
+            categoryButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Remove active class from all buttons
+                    categoryButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+
+                    // Get selected category
+                    const category = button.getAttribute('data-category');
+
+                    // Filter blog cards
+                    blogCards.forEach(card => {
+                        if (category === 'all' || card.getAttribute('data-category') === category) {
+                            card.classList.remove('hidden');
+                        } else {
+                            card.classList.add('hidden');
+                        }
+                    });
+                });
+            });
+
+            // Mobile Menu Toggle
+            const menuToggle = document.getElementById('menuToggle');
+            const navLinks = document.getElementById('navLinks');
+
+            menuToggle.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+                
+                // Toggle menu icon
+                menuToggle.textContent = navLinks.classList.contains('active') ? '✕' : '☰';
+            });
+        });
+    </script>
+</body>
+</html>

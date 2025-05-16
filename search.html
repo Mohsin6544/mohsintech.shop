@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Blogs</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background-color: #f8f9fa;
+            padding-top: 90px; /* Space for fixed navbar */
+            line-height: 1.6;
+        }
+
+        /* Navigation styles from the previous file */
+        .nav-container {
+            width: 100%;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6, #d946ef);
+            background-size: 300% 300%;
+            animation: gradientBG 15s ease infinite;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+        }
+        
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 15px 20px;
+            position: relative;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .logo {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(45deg, #00f2fe, #4facfe);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+            font-size: 20px;
+            text-transform: uppercase;
+        }
+        
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            margin-right: 20px;
+        }
+        
+        .nav-links li {
+            margin: 0 5px;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 8px 14px;
+            border-radius: 10px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            opacity: 0.85;
+        }
+        
+        .nav-links a:hover {
+            opacity: 1;
+            transform: translateY(-3px);
+        }
+        
+        .nav-links a.active {
+            opacity: 1;
+            background-color: rgba(255, 255, 255, 0.15);
+        }
+        
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        /* Search Page Styles */
+        .search-container {
+            max-width: 800px;
+            margin: 30px auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .search-container h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .search-box {
+            display: flex;
+            margin-bottom: 30px;
+        }
+
+        .search-input {
+            flex: 1;
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 4px 0 0 4px;
+            font-size: 16px;
+        }
+
+        .search-btn {
+            background-color: #6366f1;
+            color: white;
+            border: none;
+            padding: 0 20px;
+            border-radius: 0 4px 4px 0;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        .search-btn:hover {
+            background-color: #4f46e5;
+        }
+
+        .filter-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .filter-group {
+            flex: 1;
+            min-width: 150px;
+        }
+
+        .filter-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+            font-weight: 500;
+        }
+
+        .filter-group select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        .filter-group input[type="checkbox"] {
+            margin-right: 5px;
+        }
+
+        .search-results {
+            margin-top: 30px;
+        }
+
+        .result-card {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+            transition: background-color 0.3s;
+        }
+
+        .result-card:last-child {
+            border-bottom: none;
+        }
+
+        .result-card:hover {
+            background-color: #f9f9f9;
+        }
+
+        .result-title {
+            color: #4f46e5;
+            font-size: 18px;
+            margin-bottom: 5px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .result-meta {
+            display: flex;
+            gap: 15px;
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 8px;
+        }
+
+        .result-category {
+            background-color: #f1f1f1;
+            padding: 3px 8px;
+            border-radius: 10px;
+            font-size: 12px;
+        }
+
+        .result-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+            margin-top: 8px;
+        }
+
+        .result-tag {
+            background-color: #e9ecef;
+            color: #495057;
+            padding: 3px 8px;
+            border-radius: 10px;
+            font-size: 12px;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 30px 0;
+            color: #666;
+        }
+
+        .load-more {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin-top: 20px;
+            background-color: #f8f9fa;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            text-align: center;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .load-more:hover {
+            background-color: #e9ecef;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1000px) {
+            .nav-links {
+                display: none;
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 280px;
+                height: 100vh;
+                background: linear-gradient(135deg, #6366f1, #8b5cf6, #d946ef);
+                flex-direction: column;
+                align-items: center;
+                padding: 80px 0 30px;
+                box-shadow: -5px 0 25px rgba(0, 0, 0, 0.15);
+                transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+                z-index: 100;
+            }
+
+            .nav-links.active {
+                display: flex;
+                right: 0;
+            }
+
+            .menu-toggle {
+                display: block;
+                position: relative;
+                z-index: 101;
+            }
+
+            .nav-links li {
+                width: 80%;
+                margin: 8px 0;
+            }
+
+            .nav-links a {
+                display: block;
+                text-align: center;
+                width: 100%;
+                padding: 12px 20px;
+            }
+
+            .filter-container {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .filter-group {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <div class="nav-container">
+        <div class="nav-content">
+            <div class="logo-container">
+                <div class="logo">MB</div>
+            </div>
+            
+            <div class="nav-menu">
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="home.html">Home</a></li>
+                    <li><a href="explore.html">Explore</a></li>
+                    <li><a href="create.html">Create</a></li>
+                    <li><a href="search.html" class="active">Search</a></li>
+                    <li><a href="edit.html">Edit</a></li>
+                    <li><a href="all.html">Blogs</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="privacy.html">Privacy</a></li>
+                </ul>
+                
+                <button class="menu-toggle" id="menuToggle">☰</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="search-container">
+        <h1>Search Blogs</h1>
+        
+        <!-- Search Bar -->
+        <div class="search-box">
+            <input type="text" class="search-input" id="searchInput" placeholder="Search for blogs...">
+            <button class="search-btn" id="searchButton">Search</button>
+        </div>
+
+        <!-- Filters -->
+        <div class="filter-container">
+            <div class="filter-group">
+                <label for="categoryFilter">Category</label>
+                <select id="categoryFilter">
+                    <option value="">All Categories</option>
+                    <option value="tech">Technology</option>
+                    <option value="lifestyle">Lifestyle</option>
+                    <option value="education">Education</option>
+                    <option value="health">Health</option>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label for="sortBy">Sort By</label>
+                <select id="sortBy">
+                    <option value="newest">Newest First</option>
+                    <option value="oldest">Oldest First</option>
+                    <option value="popular">Most Popular</option>
+                    <option value="az">A-Z</option>
+                    <option value="za">Z-A</option>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label for="readTime">Reading Time</label>
+                <select id="readTime">
+                    <option value="">Any Length</option>
+                    <option value="short">Short (< 5 min)</option>
+                    <option value="medium">Medium (5-15 min)</option>
+                    <option value="long">Long (> 15 min)</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Search Results -->
+        <div class="search-results" id="searchResults">
+            <!-- Sample result cards to show layout -->
+            <div class="result-card">
+                <div class="result-title">How to Master Web Development in 2025</div>
+                <div class="result-meta">
+                    <span>May 10, 2025</span>
+                    <span>10 min read</span>
+                    <span class="result-category">Technology</span>
+                </div>
+                <p>The complete guide to becoming a web developer in 2025, covering the most in-demand technologies and skills...</p>
+                <div class="result-tags">
+                    <span class="result-tag">web development</span>
+                    <span class="result-tag">programming</span>
+                    <span class="result-tag">careers</span>
+                </div>
+            </div>
+
+            <div class="result-card">
+                <div class="result-title">The Future of Mobile Apps: Trends to Watch</div>
+                <div class="result-meta">
+                    <span>May 8, 2025</span>
+                    <span>7 min read</span>
+                    <span class="result-category">Technology</span>
+                </div>
+                <p>Exploring the latest trends in mobile app development and what to expect in the coming years...</p>
+                <div class="result-tags">
+                    <span class="result-tag">mobile apps</span>
+                    <span class="result-tag">tech trends</span>
+                    <span class="result-tag">development</span>
+                </div>
+            </div>
+
+            <div class="result-card">
+                <div class="result-title">5 Meditation Techniques for Busy Professionals</div>
+                <div class="result-meta">
+                    <span>May 5, 2025</span>
+                    <span>5 min read</span>
+                    <span class="result-category">Health</span>
+                </div>
+                <p>Quick and effective meditation practices that can be incorporated into even the busiest schedules...</p>
+                <div class="result-tags">
+                    <span class="result-tag">meditation</span>
+                    <span class="result-tag">mindfulness</span>
+                    <span class="result-tag">stress relief</span>
+                </div>
+            </div>
+        </div>
+
+        <button class="load-more" id="loadMoreBtn">Load More</button>
+    </div>
+
+
+    <div id="feaa"></div>
+
+    <script>
+
+// Load footer
+    fetch('f1.html')
+      .then(res => res.text())
+      .then(data => {
+        document.getElementById('feaa').innerHTML = data;
+      });
+
+
+        // Mobile Menu Toggle
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuToggle = document.getElementById('menuToggle');
+            const navLinks = document.getElementById('navLinks');
+            
+            menuToggle.addEventListener('click', function() {
+                navLinks.classList.toggle('active');
+                
+                // Toggle menu icon
+                this.innerHTML = navLinks.classList.contains('active') ? '✕' : '☰';
+            });
+
+            // Close menu when a link is clicked
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navLinks.classList.remove('active');
+                    menuToggle.innerHTML = '☰';
+                });
+            });
+
+            // Search functionality
+            const searchButton = document.getElementById('searchButton');
+            const searchInput = document.getElementById('searchInput');
+            const categoryFilter = document.getElementById('categoryFilter');
+            const sortBy = document.getElementById('sortBy');
+            const readTime = document.getElementById('readTime');
+            const loadMoreBtn = document.getElementById('loadMoreBtn');
+            
+            searchButton.addEventListener('click', function() {
+                performSearch();
+            });
+            
+            searchInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    performSearch();
+                }
+            });
+            
+            // Filter change triggers search
+            categoryFilter.addEventListener('change', performSearch);
+            sortBy.addEventListener('change', performSearch);
+            readTime.addEventListener('change', performSearch);
+            
+            // Load more functionality
+            loadMoreBtn.addEventListener('click', function() {
+                // In a real app, this would load more results
+                alert('In a real application, this would load more search results');
+            });
+            
+            function performSearch() {
+                const query = searchInput.value;
+                const category = categoryFilter.value;
+                const sort = sortBy.value;
+                const time = readTime.value;
+                
+                // In a real app, this would send the search parameters to a server
+                console.log('Search parameters:', {
+                    query: query,
+                    category: category,
+                    sortBy: sort,
+                    readingTime: time
+                });
+                
+                // For demo purposes, just show an alert
+                if (query) {
+                    alert(`Searching for "${query}" with selected filters`);
+                } else {
+                    alert('Filtering results with selected options');
+                }
+            }
+        });
+    </script>
+</body>
+</html>

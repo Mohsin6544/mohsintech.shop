@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compact Footer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #1e88e5;
+            --primary-dark: #0d47a1;
+            --secondary-color: #26c6da;
+            --accent-color: #ff5252;
+            --white: #ffffff;
+            --text-light: rgba(255, 255, 255, 0.8);
+            --footer-bg: #0d47a1;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        main {
+            flex: 1;
+        }
+
+        /* Compact Footer */
+        .footer {
+            position: relative;
+            background: linear-gradient(to bottom, #1565c0, #0d47a1);
+            color: var(--white);
+            overflow: hidden;
+            padding: 40px 0 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .footer-content {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 30px;
+        }
+
+        .footer-logo {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .footer-logo h3 {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .footer-logo h3 i {
+            color: var(--secondary-color);
+            margin-right: 8px;
+        }
+
+        .footer-logo p {
+            color: var(--text-light);
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 12px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: var(--white);
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-3px);
+        }
+
+        .footer-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 40px;
+        }
+
+        .footer-column {
+            min-width: 140px;
+        }
+
+        .footer-column h4 {
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            color: var(--secondary-color);
+            position: relative;
+            padding-bottom: 8px;
+        }
+
+        .footer-column h4::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 30px;
+            height: 2px;
+            background-color: var(--accent-color);
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 8px;
+        }
+
+        .footer-column ul li a {
+            color: var(--text-light);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .footer-column ul li a:hover {
+            color: var(--secondary-color);
+            padding-left: 5px;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            margin-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.85rem;
+            color: var(--text-light);
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Fish Animation */
+        .ocean-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .fish {
+            position: absolute;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 50' fill='%23ffffff' opacity='0.2'%3E%3Cpath d='M95,25 C80,10 60,0 40,0 C20,0 5,10 0,25 C5,40 20,50 40,50 C60,50 80,40 95,25 Z M25,20 A5,5 0 1,1 25,30 A5,5 0 1,1 25,20 Z'/%3E%3C/svg%3E");
+            background-size: contain;
+            background-repeat: no-repeat;
+            z-index: 0;
+        }
+
+        .bubbles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .bubbles::before {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(circle, rgba(255, 255, 255, 0.1) 8%, transparent 8%),
+                            radial-gradient(circle, rgba(255, 255, 255, 0.05) 4%, transparent 4%);
+            background-size: 100px 100px, 60px 60px;
+            background-position: 0 0, 30px 30px;
+            animation: bubbles 50s linear infinite;
+        }
+
+        @keyframes bubbles {
+            0% {
+                transform: translateY(0);
+            }
+            100% {
+                transform: translateY(-100%);
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            .footer-content {
+                flex-direction: column;
+                gap: 25px;
+            }
+            
+            .footer-links {
+                gap: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <!-- Your page content here -->
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <h3><i class="fas fa-water"></i> MyBlog</h3>
+                    <p>Where creativity meets thoughts</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>Links</h4>
+                        <ul>
+                            <li><a href="#">Home</a></li>
+                            <li><a href="#">About</a></li>
+                            <li><a href="#">Contact</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-column">
+                        <h4>Categories</h4>
+                        <ul>
+                            <li><a href="#">Technology</a></li>
+                            <li><a href="#">Lifestyle</a></li>
+                            <li><a href="#">Travel</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 MyBlog. All rights reserved.</p>
+            </div>
+        </div>
+        
+        <!-- Ocean Animation Container -->
+        <div class="ocean-container">
+            <div class="bubbles"></div>
+            <div class="fish" id="fish1"></div>
+            <div class="fish" id="fish2"></div>
+            <div class="fish" id="fish3"></div>
+        </div>
+    </footer>
+
+    <script>
+        // Fish animation
+        document.addEventListener('DOMContentLoaded', function() {
+            const fishElements = document.querySelectorAll('.fish');
+            
+            fishElements.forEach((fish, index) => {
+                // Set fish size
+                const size = 30 + (index * 10);
+                fish.style.width = `${size}px`;
+                fish.style.height = `${size / 2}px`;
+                
+                // Set fish position
+                fish.style.top = `${20 + (index * 25)}%`;
+                fish.style.left = '-60px';
+                
+                // Create animation
+                animateFish(fish, index);
+            });
+            
+            function animateFish(fish, index) {
+                // Random speed between 15-25 seconds
+                const duration = 15 + (Math.random() * 10);
+                const delay = index * 3;
+                
+                // Create animation
+                fish.animate([
+                    { transform: 'translateX(-60px)' },
+                    { transform: 'translateX(calc(100vw + 60px))' }
+                ], {
+                    duration: duration * 1000,
+                    delay: delay * 1000,
+                    iterations: Infinity,
+                    easing: 'linear'
+                });
+            }
+        });
+    </script>
+</body>
+</html>
