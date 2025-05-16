@@ -1,4 +1,0 @@
-User-agent: *
-Disallow:
-
-Sitemap: https://mohsintech.shop/sitemap.xml
