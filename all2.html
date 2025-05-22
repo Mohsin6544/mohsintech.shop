@@ -15,9 +15,30 @@
         }
         
         body {
-            background-color: #f8f9fa;
+            background-color: #f5f7ff;
             padding-top: 90px; /* Space for fixed navbar */
             line-height: 1.6;
+            color: #444;
+        }
+
+        /* Animation for page background */
+        @keyframes gradientAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(100, 100, 255, 0.03), rgba(100, 200, 255, 0.03), rgba(200, 100, 255, 0.03));
+            background-size: 400% 400%;
+            animation: gradientAnimation 15s ease infinite;
+            z-index: -1;
         }
 
         /* Navigation styles from the previous file */
@@ -26,7 +47,7 @@
             background: linear-gradient(135deg, #6366f1, #8b5cf6, #d946ef);
             background-size: 300% 300%;
             animation: gradientBG 15s ease infinite;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
             position: fixed;
             top: 0;
             left: 0;
@@ -69,6 +90,13 @@
             color: white;
             font-size: 20px;
             text-transform: uppercase;
+            box-shadow: 0 5px 15px rgba(0, 242, 254, 0.3);
+            transform-style: preserve-3d;
+            transition: transform 0.5s;
+        }
+        
+        .logo:hover {
+            transform: rotateY(15deg);
         }
         
         .nav-menu {
@@ -100,11 +128,13 @@
         .nav-links a:hover {
             opacity: 1;
             transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255, 255, 255, 0.2);
         }
         
         .nav-links a.active {
             opacity: 1;
             background-color: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 5px 15px rgba(255, 255, 255, 0.2);
         }
         
         .menu-toggle {
@@ -121,49 +151,115 @@
             max-width: 1000px;
             margin: 30px auto;
             padding: 0 20px;
+            animation: fadeIn 1s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .page-header {
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 40px;
             color: #333;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .page-header:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, #6366f1, #d946ef);
+            border-radius: 2px;
         }
 
         .blogs-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 25px;
+            gap: 30px;
         }
 
         .blog-card {
             background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 16px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
             overflow: hidden;
-            transition: transform 0.3s, box-shadow 0.3s;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            opacity: 0;
+            transform: translateY(20px);
+            animation: cardAppear 0.5s forwards;
+            position: relative;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        @keyframes cardAppear {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .blog-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
         }
 
-        .blog-image {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
+        .category-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: linear-gradient(45deg, #6366f1, #8b5cf6);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            text-transform: capitalize;
+        }
+
+        .tech {
+            background: linear-gradient(45deg, #4f46e5, #6366f1);
+        }
+
+        .lifestyle {
+            background: linear-gradient(45deg, #10b981, #34d399);
+        }
+
+        .health {
+            background: linear-gradient(45deg, #ef4444, #f87171);
+        }
+
+        .education {
+            background: linear-gradient(45deg, #f59e0b, #fbbf24);
         }
 
         .blog-content {
-            padding: 20px;
+            padding: 25px;
         }
 
         .blog-title {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             font-weight: 600;
-            color: #4f46e5;
-            margin-bottom: 10px;
+            color: #333;
+            margin-bottom: 12px;
             cursor: pointer;
+            transition: color 0.3s;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            min-height: 3.2rem;
+        }
+
+        .blog-title:hover {
+            color: #6366f1;
         }
 
         .blog-meta {
@@ -171,79 +267,252 @@
             justify-content: space-between;
             color: #666;
             font-size: 0.9rem;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+
+        .blog-meta span {
+            display: flex;
+            align-items: center;
+        }
+
+        .blog-meta i {
+            margin-right: 5px;
+            color: #6366f1;
         }
 
         .blog-excerpt {
-            color: #333;
-            margin-bottom: 15px;
+            color: #666;
+            margin-bottom: 20px;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            line-height: 1.6;
+            font-size: 0.95rem;
+            min-height: 4.8rem;
         }
 
         .blog-tags {
             display: flex;
             flex-wrap: wrap;
-            gap: 5px;
+            gap: 8px;
         }
 
         .blog-tag {
-            background-color: #f1f1f1;
-            color: #666;
-            padding: 3px 8px;
+            background-color: #f1f5ff;
+            color: #6366f1;
+            padding: 5px 12px;
             border-radius: 15px;
             font-size: 0.8rem;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        .blog-tag:hover {
+            background-color: #6366f1;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .read-more {
+            display: inline-block;
+            margin-top: 15px;
+            color: #6366f1;
+            font-weight: 500;
+            text-decoration: none;
+            position: relative;
+            padding-bottom: 2px;
+        }
+
+        .read-more:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #6366f1;
+            transition: width 0.3s;
+        }
+
+        .read-more:hover:after {
+            width: 100%;
         }
 
         .pagination {
             display: flex;
             justify-content: center;
-            margin-top: 30px;
+            margin-top: 50px;
+            animation: fadeIn 1s ease-out 0.5s backwards;
         }
 
         .pagination-btn {
-            background-color: #f1f1f1;
+            background-color: white;
             border: none;
-            padding: 10px 15px;
+            padding: 10px 18px;
             margin: 0 5px;
-            border-radius: 4px;
+            border-radius: 8px;
             cursor: pointer;
-            transition: background-color 0.3s;
+            transition: all 0.3s;
+            font-weight: 500;
+            color: #666;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
         }
 
         .pagination-btn:hover {
-            background-color: #e1e1e1;
+            background-color: #f1f5ff;
+            color: #6366f1;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
         }
 
         .pagination-btn.active {
-            background-color: #6366f1;
+            background: linear-gradient(45deg, #6366f1, #8b5cf6);
             color: white;
+            box-shadow: 0 5px 15px rgba(99, 102, 241, 0.3);
         }
 
         /* Category Filter */
         .category-filter {
             display: flex;
             justify-content: center;
-            margin-bottom: 30px;
+            margin-bottom: 40px;
             flex-wrap: wrap;
+            animation: fadeIn 1s ease-out 0.2s backwards;
         }
 
         .category-btn {
-            background-color: #f1f1f1;
+            background-color: white;
             border: none;
-            padding: 10px 15px;
-            margin: 5px;
-            border-radius: 20px;
+            padding: 10px 20px;
+            margin: 8px;
+            border-radius: 25px;
             cursor: pointer;
-            transition: background-color 0.3s;
+            transition: all 0.3s;
+            font-weight: 500;
+            color: #666;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
         }
 
-        .category-btn:hover, .category-btn.active {
-            background-color: #6366f1;
+        .category-btn:before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 0;
+            background: linear-gradient(45deg, #6366f1, #8b5cf6);
+            transition: height 0.3s ease;
+            z-index: -1;
+            border-radius: 25px;
+        }
+
+        .category-btn:hover {
             color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(99, 102, 241, 0.2);
+        }
+
+        .category-btn:hover:before {
+            height: 100%;
+        }
+
+        .category-btn.active {
+            background: linear-gradient(45deg, #6366f1, #8b5cf6);
+            color: white;
+            box-shadow: 0 6px 15px rgba(99, 102, 241, 0.3);
         }
 
         /* Hidden Blog Cards */
         .blog-card.hidden {
             display: none;
+        }
+
+        /* Loading Spinner */
+        .loading-spinner {
+            text-align: center;
+            margin: 80px 0;
+            display: none;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .spinner {
+            border: 4px solid rgba(99, 102, 241, 0.1);
+            border-left: 4px solid #6366f1;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+
+        /* No Posts Message */
+        .no-posts {
+            text-align: center;
+            margin: 80px 0;
+            color: #666;
+            display: none;
+            padding: 30px;
+            background-color: white;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .no-posts h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        .no-posts p {
+            font-size: 1.1rem;
+        }
+
+        /* Error Message */
+        .error-message {
+            text-align: center;
+            margin: 80px 0;
+            color: #e74c3c;
+            display: none;
+            padding: 30px;
+            background-color: #fdf7f7;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .error-message h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Loading Animation */
+        .blog-card {
+            animation-duration: 0.5s;
+            animation-fill-mode: both;
+        }
+
+        /* Add delay to each card for cascading effect */
+        .blog-card:nth-child(1) { animation-delay: 0.1s; }
+        .blog-card:nth-child(2) { animation-delay: 0.2s; }
+        .blog-card:nth-child(3) { animation-delay: 0.3s; }
+        .blog-card:nth-child(4) { animation-delay: 0.4s; }
+        .blog-card:nth-child(5) { animation-delay: 0.5s; }
+        .blog-card:nth-child(6) { animation-delay: 0.6s; }
+
+        /* Page transitions */
+        .page-transition {
+            animation: fadeIn 0.5s ease-out;
         }
 
         /* Responsive Design */
@@ -301,6 +570,25 @@
                 margin: 5px 0;
             }
         }
+
+    .logo-circle {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 40px; /* Bigger emoji size */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    border: 2px solid #ccc;
+    transition: transform 0.3s ease;
+}
+
+.logo-circle:hover {
+    transform: scale(1.1);
+}
+
     </style>
 </head>
 <body>
@@ -308,17 +596,17 @@
     <div class="nav-container">
         <div class="nav-content">
             <div class="logo-container">
-            <a href="index.html" class="logo">MB</a>
+             <a href="index.html"><div class="logo-circle">🤖</div></a>
             </div>
             
             <div class="nav-menu">
                 <ul class="nav-links" id="navLinks">
                     <li><a href="home.html">Home</a></li>
-                    <li><a href="explore.html">Explore</a></li>
-                    <li><a href="create.html">Create</a></li>
+                    <li><a href="ai.html">AI</a></li>
+                    <li><a href="create3.html">Create</a></li>
                     <li><a href="search.html">Search</a></li>
                     <li><a href="edit.html">Edit</a></li>
-                    <li><a href="all.html" class="active">Blogs</a></li>
+                    <li><a href="all2.html" class="active">Blogs</a></li>
                     <li><a href="about.html">About</a></li>
                     <li><a href="contact.html">Contact</a></li>
                     <li><a href="privacy.html">Privacy</a></li>
@@ -335,181 +623,388 @@
         <!-- Category Filter -->
         <div class="category-filter">
             <button class="category-btn active" data-category="all">All</button>
-            <button class="category-btn" data-category="technology">Technology</button>
+            <button class="category-btn" data-category="tech">Technology</button>
             <button class="category-btn" data-category="lifestyle">Lifestyle</button>
             <button class="category-btn" data-category="health">Health</button>
             <button class="category-btn" data-category="education">Education</button>
         </div>
 
-        <!-- Blogs Grid -->
-        <div class="blogs-grid">
-            <!-- Blog Card 1 -->
-            <div class="blog-card" data-category="technology">
-                <img src="/api/placeholder/400/200" alt="Blog Thumbnail" class="blog-image">
-                <div class="blog-content">
-                    <h2 class="blog-title">How to Master Web Development in 2025</h2>
-                    <div class="blog-meta">
-                        <span>10 min read</span>
-                        <span>May 10, 2025</span>
-                    </div>
-                    <p class="blog-excerpt">The complete guide to becoming a web developer in 2025, covering the most in-demand technologies and skills...</p>
-                    <div class="blog-tags">
-                        <span class="blog-tag">web development</span>
-                        <span class="blog-tag">programming</span>
-                        <span class="blog-tag">careers</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Blog Card 2 -->
-            <div class="blog-card" data-category="technology">
-                <img src="/api/placeholder/400/200" alt="Blog Thumbnail" class="blog-image">
-                <div class="blog-content">
-                    <h2 class="blog-title">The Future of Mobile Apps: Trends to Watch</h2>
-                    <div class="blog-meta">
-                        <span>7 min read</span>
-                        <span>May 8, 2025</span>
-                    </div>
-                    <p class="blog-excerpt">Exploring the latest trends in mobile app development and what to expect in the coming years...</p>
-                    <div class="blog-tags">
-                        <span class="blog-tag">mobile apps</span>
-                        <span class="blog-tag">tech trends</span>
-                        <span class="blog-tag">development</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Blog Card 3 -->
-            <div class="blog-card" data-category="health">
-                <img src="/api/placeholder/400/200" alt="Blog Thumbnail" class="blog-image">
-                <div class="blog-content">
-                    <h2 class="blog-title">5 Meditation Techniques for Busy Professionals</h2>
-                    <div class="blog-meta">
-                        <span>5 min read</span>
-                        <span>May 5, 2025</span>
-                    </div>
-                    <p class="blog-excerpt">Quick and effective meditation practices that can be incorporated into even the busiest schedules...</p>
-                    <div class="blog-tags">
-                        <span class="blog-tag">meditation</span>
-                        <span class="blog-tag">mindfulness</span>
-                        <span class="blog-tag">stress relief</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Blog Card 4 -->
-            <div class="blog-card" data-category="lifestyle">
-                <img src="/api/placeholder/400/200" alt="Blog Thumbnail" class="blog-image">
-                <div class="blog-content">
-                    <h2 class="blog-title">Minimalist Living: Simplify Your Life</h2>
-                    <div class="blog-meta">
-                        <span>8 min read</span>
-                        <span>May 3, 2025</span>
-                    </div>
-                    <p class="blog-excerpt">Practical tips and strategies to embrace minimalism and reduce stress in your daily life...</p>
-                    <div class="blog-tags">
-                        <span class="blog-tag">minimalism</span>
-                        <span class="blog-tag">lifestyle</span>
-                        <span class="blog-tag">productivity</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Blog Card 5 -->
-            <div class="blog-card" data-category="education">
-                <img src="/api/placeholder/400/200" alt="Blog Thumbnail" class="blog-image">
-                <div class="blog-content">
-                    <h2 class="blog-title">Online Learning: Strategies for Success</h2>
-                    <div class="blog-meta">
-                        <span>6 min read</span>
-                        <span>April 28, 2025</span>
-                    </div>
-                    <p class="blog-excerpt">Effective techniques to maximize your learning potential in online educational environments...</p>
-                    <div class="blog-tags">
-                        <span class="blog-tag">online learning</span>
-                        <span class="blog-tag">education</span>
-                        <span class="blog-tag">skill development</span>
-                    </div>
-                </div>
-            </div
-
-
-            <!-- Blog Card 6 -->
-            <div class="blog-card" data-category="health">
-                <img src="/api/placeholder/400/200" alt="Blog Thumbnail" class="blog-image">
-                <div class="blog-content">
-                    <h2 class="blog-title">Nutrition for Mental Clarity and Focus</h2>
-                    <div class="blog-meta">
-                        <span>9 min read</span>
-                        <span>April 25, 2025</span>
-                    </div>
-                    <p class="blog-excerpt">Discover the best foods and dietary habits to enhance cognitive function and mental performance...</p>
-                    <div class="blog-tags">
-                        <span class="blog-tag">nutrition</span>
-                        <span class="blog-tag">mental health</span>
-                        <span class="blog-tag">wellness</span>
-                    </div>
-                </div>
-            </div>
+        <!-- Error Message -->
+        <div class="error-message" id="errorMessage">
+            <h3>Something went wrong</h3>
+            <p id="errorText"></p>
         </div>
 
-        <!-- Pagination (Optional) -->
-        <div class="pagination">
-            <button class="pagination-btn active">1</button>
-            <button class="pagination-btn">2</button>
-            <button class="pagination-btn">3</button>
-            <button class="pagination-btn">Next</button>
+        <!-- Loading Spinner -->
+        <div class="loading-spinner" id="loadingSpinner">
+            <div class="spinner"></div>
+            <p>Loading blog posts...</p>
+        </div>
+
+        <!-- No Posts Message -->
+        <div class="no-posts" id="noPosts">
+            <h3>No Posts Found</h3>
+            <p>No blog posts found in this category. Be the first to create one!</p>
+        </div>
+
+        <!-- Blogs Grid -->
+        <div class="blogs-grid" id="blogsGrid">
+            <!-- Blog cards will be dynamically added here -->
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination" id="pagination">
+            <!-- Pagination buttons will be dynamically added here -->
         </div>
     </div>
 
-     <div id="feaa"></div>
+    <div id="feaa"></div>
 
-    <script>
+    <script type="module">
+        // Import Firebase modules
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.7.3/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.7.3/firebase-analytics.js";
+        import { getDatabase, ref, onValue, query, orderByChild, limitToFirst, startAt, endAt, get } from "https://www.gstatic.com/firebasejs/11.7.3/firebase-database.js";
 
-// Load footer
-    fetch('f1.html')
-      .then(res => res.text())
-      .then(data => {
-        document.getElementById('feaa').innerHTML = data;
-      });
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyDbDE0qGjNOBJlhcmp31ej_Q9YDCtSQBCo",
+            authDomain: "editable-database-9d7a7.firebaseapp.com",
+            projectId: "editable-database-9d7a7",
+            storageBucket: "editable-database-9d7a7.firebasestorage.app",
+            messagingSenderId: "859479978156",
+            appId: "1:859479978156:web:cf7005d11f4438992b2f09",
+            measurementId: "G-629CLB3EZN"
+        };
 
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        const database = getDatabase(app);
 
-        // Category Filtering
-        document.addEventListener('DOMContentLoaded', () => {
-            const categoryButtons = document.querySelectorAll('.category-btn');
-            const blogCards = document.querySelectorAll('.blog-card');
+        // DOM Elements
+        const blogsGrid = document.getElementById('blogsGrid');
+        const loadingSpinner = document.getElementById('loadingSpinner');
+        const noPostsMessage = document.getElementById('noPosts');
+        const errorMessage = document.getElementById('errorMessage');
+        const errorText = document.getElementById('errorText');
+        const paginationContainer = document.getElementById('pagination');
+        const categoryButtons = document.querySelectorAll('.category-btn');
 
-            categoryButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    // Remove active class from all buttons
-                    categoryButtons.forEach(btn => btn.classList.remove('active'));
-                    button.classList.add('active');
+        // Pagination variables
+        const postsPerPage = 6;
+        let currentPage = 1;
+        let allPosts = [];
+        let filteredPosts = [];
 
-                    // Get selected category
-                    const category = button.getAttribute('data-category');
+        // Set up event listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile menu setup
+            setupMobileMenu();
+            
+            // Set up category filter buttons
+            setupCategoryButtons();
+            
+            // Load blog posts
+            loadBlogPosts();
+            
+            // Load footer
+            loadFooter();
+        });
 
-                    // Filter blog cards
-                    blogCards.forEach(card => {
-                        if (category === 'all' || card.getAttribute('data-category') === category) {
-                            card.classList.remove('hidden');
-                        } else {
-                            card.classList.add('hidden');
-                        }
-                    });
-                });
-            });
-
-            // Mobile Menu Toggle
+        // Setup mobile menu
+        function setupMobileMenu() {
             const menuToggle = document.getElementById('menuToggle');
             const navLinks = document.getElementById('navLinks');
-
-            menuToggle.addEventListener('click', () => {
+            
+            menuToggle.addEventListener('click', function() {
                 navLinks.classList.toggle('active');
-                
                 // Toggle menu icon
-                menuToggle.textContent = navLinks.classList.contains('active') ? '✕' : '☰';
+                this.innerHTML = navLinks.classList.contains('active') ? '✕' : '☰';
             });
-        });
+
+            // Close menu when a link is clicked
+            document.querySelectorAll('.nav-links a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navLinks.classList.remove('active');
+                    menuToggle.innerHTML = '☰';
+                });
+            });
+        }
+
+        // Setup category filter buttons
+        function setupCategoryButtons() {
+            categoryButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Add transition class to the blogs grid
+                    blogsGrid.classList.add('page-transition');
+                    
+                    // Remove active class from all buttons
+                    categoryButtons.forEach(btn => btn.classList.remove('active'));
+                    // Add active class to clicked button
+                    this.classList.add('active');
+                    // Filter posts by category
+                    filterByCategory(this.dataset.category);
+                    
+                    // Remove transition class after animation completes
+                    setTimeout(() => {
+                        blogsGrid.classList.remove('page-transition');
+                    }, 500);
+                });
+            });
+        }
+
+        // Load footer
+        function loadFooter() {
+            fetch('f2.html')
+                .then(res => res.text())
+                .then(data => {
+                    document.getElementById('feaa').innerHTML = data;
+                })
+                .catch(err => {
+                    console.error("Error loading footer:", err);
+                });
+        }
+
+        // Load blog posts from database
+        function loadBlogPosts() {
+            // Show loading spinner
+            loadingSpinner.style.display = 'block';
+            blogsGrid.style.display = 'none';
+            noPostsMessage.style.display = 'none';
+            errorMessage.style.display = 'none';
+            
+            // Get database reference
+            const postsRef = ref(database, 'posts');
+            
+            // Fetch posts
+            onValue(postsRef, (snapshot) => {
+                if (snapshot.exists()) {
+                    allPosts = [];
+                    
+                    // Convert Firebase data to array
+                    snapshot.forEach((childSnapshot) => {
+                        const postId = childSnapshot.key;
+                        const postData = childSnapshot.val();
+                        
+                        // Add post to array with its ID
+                        allPosts.push({
+                            id: postId,
+                            ...postData
+                        });
+                    });
+                    
+                    // Sort by date (newest first)
+                    allPosts.sort((a, b) => new Date(b.createdAt || 0) - new Date(a.createdAt || 0));
+                    
+                    // Initially show all posts
+                    filteredPosts = [...allPosts];
+                    
+                    if (filteredPosts.length > 0) {
+                        // Display first page
+                        displayPosts(1);
+                        updatePagination();
+                        blogsGrid.style.display = 'grid';
+                    } else {
+                        // No posts found
+                        showNoPosts();
+                    }
+                } else {
+                    // No posts found
+                    showNoPosts();
+                }
+                
+                // Hide loading spinner
+                loadingSpinner.style.display = 'none';
+            }, (error) => {
+                console.error("Error loading posts:", error);
+                showError(error);
+            });
+        }
+
+        // Show error message
+        function showError(error) {
+            loadingSpinner.style.display = 'none';
+            blogsGrid.style.display = 'none';
+            errorMessage.style.display = 'block';
+            noPostsMessage.style.display = 'none';
+            
+            errorText.textContent = error ? error.message : "An unknown error occurred while loading blog posts.";
+        }
+
+        // Show no posts message
+        function showNoPosts() {
+            loadingSpinner.style.display = 'none';
+            blogsGrid.style.display = 'none';
+            errorMessage.style.display = 'none';
+            noPostsMessage.style.display = 'block';
+        }
+
+        // Create and display blog cards
+        function displayPosts(page) {
+            // Clear existing content
+            blogsGrid.innerHTML = '';
+            
+            // Calculate pagination limits
+            const startIndex = (page - 1) * postsPerPage;
+            const endIndex = page * postsPerPage;
+            const postsToDisplay = filteredPosts.slice(startIndex, endIndex);
+            
+            if (postsToDisplay.length === 0) {
+                // No posts to display
+                blogsGrid.style.display = 'none';
+                noPostsMessage.style.display = 'block';
+                return;
+            }
+            
+            // Show grid, hide no posts message
+            blogsGrid.style.display = 'grid';
+            noPostsMessage.style.display = 'none';
+            
+            // Create blog cards
+            postsToDisplay.forEach((post, index) => {
+                // Create blog card
+                const blogCard = document.createElement('div');
+                blogCard.className = 'blog-card';
+                blogCard.setAttribute('data-category', post.category || 'other');
+                blogCard.style.animationDelay = `${0.1 * index}s`;
+                
+                // Format date
+                const postDate = post.createdAt ? new Date(post.createdAt) : new Date();
+                const formattedDate = postDate.toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'short',
+                    day: 'numeric'
+                });
+                
+                // Create excerpt from content (first 120 characters)
+                const content = post.content || 'No content available';
+                const excerpt = content.length > 120 
+                    ? content.substring(0, 120) + '...' 
+                    : content;
+                
+                // Create tags HTML
+                let tagsHTML = '';
+                if (post.tags) {
+                    // Handle tags as array or string
+                    if (Array.isArray(post.tags)) {
+                        post.tags.forEach(tag => {
+                            tagsHTML += `<span class="blog-tag">${tag}</span>`;
+                        });
+                    } else if (typeof post.tags === 'string') {
+                        tagsHTML = `<span class="blog-tag">${post.tags}</span>`;
+                    }
+                } else {
+                    // Add default tag if none exist
+                    tagsHTML = `<span class="blog-tag">${post.category || 'Blog'}</span>`;
+                }
+                
+                // Set blog card HTML - REMOVED IMAGE SECTION
+                blogCard.innerHTML = `
+                    <div class="blog-content">
+                        <h2 class="blog-title">${post.title || 'Untitled Post'}</h2>
+                        <div class="blog-meta">
+                            <span>${post.readTime || 5} min read</span>
+                            <span>${formattedDate}</span>
+                        </div>
+                        <p class="blog-excerpt">${excerpt}</p>
+                        <div class="blog-tags">
+                            ${tagsHTML}
+                        </div>
+                    </div>
+                `;
+                
+                // Add click event to view full blog post
+                blogCard.querySelector('.blog-title').addEventListener('click', () => {
+                    // Redirect to a detailed view of the blog post
+                    window.location.href = `view.html?id=${post.id}`;
+                });
+                
+                // Add card to grid
+                blogsGrid.appendChild(blogCard);
+            });
+        }
+
+        // Update pagination buttons
+        function updatePagination() {
+            paginationContainer.innerHTML = '';
+            
+            // Calculate total pages
+            const totalPages = Math.ceil(filteredPosts.length / postsPerPage);
+            
+            if (totalPages <= 1) {
+                paginationContainer.style.display = 'none';
+                return;
+            }
+            
+            paginationContainer.style.display = 'flex';
+            
+            // Previous button
+            if (currentPage > 1) {
+                const prevBtn = document.createElement('button');
+                prevBtn.className = 'pagination-btn';
+                prevBtn.textContent = 'Prev';
+                prevBtn.addEventListener('click', () => {
+                    currentPage--;
+                    displayPosts(currentPage);
+                    updatePagination();
+                    // Scroll to top of blogs container
+                    document.querySelector('.blogs-container').scrollIntoView({ behavior: 'smooth' });
+                });
+                paginationContainer.appendChild(prevBtn);
+            }
+            
+            // Page buttons (show max 5 pages)
+            const maxButtons = 5;
+            let startPage = Math.max(1, currentPage - Math.floor(maxButtons / 2));
+            let endPage = Math.min(totalPages, startPage + maxButtons - 1);
+            
+            if (endPage - startPage + 1 < maxButtons) {
+                startPage = Math.max(1, endPage - maxButtons + 1);
+            }
+            
+            for (let i = startPage; i <= endPage; i++) {
+                const pageBtn = document.createElement('button');
+                pageBtn.className = 'pagination-btn' + (i === currentPage ? ' active' : '');
+                pageBtn.textContent = i;
+                pageBtn.addEventListener('click', () => {
+                    currentPage = i;
+                    displayPosts(currentPage);
+                    updatePagination();
+                    // Scroll to top of blogs container
+                    document.querySelector('.blogs-container').scrollIntoView({ behavior: 'smooth' });
+                });
+                paginationContainer.appendChild(pageBtn);
+            }
+            
+            // Next button
+            if (currentPage < totalPages) {
+                const nextBtn = document.createElement('button');
+                nextBtn.className = 'pagination-btn';
+                nextBtn.textContent = 'Next';
+                nextBtn.addEventListener('click', () => {
+                    currentPage++;
+                    displayPosts(currentPage);
+                    updatePagination();
+                    // Scroll to top of blogs container
+                    document.querySelector('.blogs-container').scrollIntoView({ behavior: 'smooth' });
+                });
+                paginationContainer.appendChild(nextBtn);
+            }
+        }
+
+        // Filter posts by category
+        function filterByCategory(category) {
+            if (category === 'all') {
+                filteredPosts = [...allPosts];
+            } else {
+                filteredPosts = allPosts.filter(post => post.category === category);
+            }
+            
+            currentPage = 1;
+            displayPosts(currentPage);
+            updatePagination();
+        }
     </script>
 </body>
 </html>
