@@ -235,6 +235,24 @@
                 padding: 12px 20px;
             }
         }
+        .logo-circle {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 40px; /* Bigger emoji size */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    border: 2px solid #ccc;
+    transition: transform 0.3s ease;
+}
+
+.logo-circle:hover {
+    transform: scale(1.1);
+}
+
     </style>
 </head>
 <body>
@@ -242,17 +260,17 @@
     <div class="nav-container">
         <div class="nav-content">
             <div class="logo-container">
-             <a href="index.html" class="logo">MB</a>
+             <a href="index.html"><div class="logo-circle">🤖</div></a>
             </div>
             
             <div class="nav-menu">
                 <ul class="nav-links" id="navLinks">
                     <li><a href="home.html">Home</a></li>
-                    <li><a href="explore.html">Explore</a></li>
-                    <li><a href="create.html" class="active">Create</a></li>
+                    <li><a href="ai.html">AI</a></li>
+                    <li><a href="create3.html" class="active">Create</a></li>
                     <li><a href="search.html">Search</a></li>
                     <li><a href="edit.html">Edit</a></li>
-                    <li><a href="all.html">Blogs</a></li>
+                    <li><a href="all2.html">Blogs</a></li>
                     <li><a href="about.html">About</a></li>
                     <li><a href="contact.html">Contact</a></li>
                     <li><a href="privacy.html">Privacy</a></li>
@@ -298,21 +316,43 @@
                 <textarea id="content" required placeholder="Write your blog post here..."></textarea>
             </div>
 
-            <button type="submit" class="submit-btn">Publish Blog Post</button>
+            <button type="submit" id="submit" class="submit-btn">Publish Blog Post</button>
         </form>
     </div>
 
     <div id="feaa"></div>
 
-    <script>
+    <script type="module">
+        // Import Firebase modules
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.7.3/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.7.3/firebase-analytics.js";
+        import { getDatabase, push, ref, set } from "https://www.gstatic.com/firebasejs/11.7.3/firebase-database.js";
 
-    // Load footer
-    fetch('f1.html')
-      .then(res => res.text())
-      .then(data => {
-        document.getElementById('feaa').innerHTML = data;
-      });
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyDbDE0qGjNOBJlhcmp31ej_Q9YDCtSQBCo",
+            authDomain: "editable-database-9d7a7.firebaseapp.com",
+            projectId: "editable-database-9d7a7",
+            storageBucket: "editable-database-9d7a7.firebasestorage.app",
+            messagingSenderId: "859479978156",
+            appId: "1:859479978156:web:cf7005d11f4438992b2f09",
+            measurementId: "G-629CLB3EZN"
+        };
 
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        const database = getDatabase(app);
+
+        // Load footer
+        fetch('f2.html')
+            .then(res => res.text())
+            .then(data => {
+                document.getElementById('feaa').innerHTML = data;
+            })
+            .catch(err => {
+                console.error("Error loading footer:", err);
+            });
 
         // Mobile Menu Toggle
         document.addEventListener('DOMContentLoaded', function() {
@@ -352,8 +392,21 @@
                     // Create tag element
                     const tagElement = document.createElement('span');
                     tagElement.className = 'tag';
-                    tagElement.innerHTML = `${tagValue} 
-                        <span class="tag-close" onclick="removeTag(this)">×</span>`;
+                    tagElement.innerHTML = `${tagValue} <span class="tag-close">×</span>`;
+                    
+                    // Add click event to the close button
+                    tagElement.querySelector('.tag-close').addEventListener('click', function() {
+                        const tagText = this.parentElement.textContent.trim().replace('×', '').trim();
+                        
+                        // Remove from tags array
+                        const index = tags.indexOf(tagText);
+                        if (index > -1) {
+                            tags.splice(index, 1);
+                        }
+                        
+                        // Remove from DOM
+                        tagsContainer.removeChild(this.parentElement);
+                    });
                     
                     // Add to container
                     tagsContainer.appendChild(tagElement);
@@ -364,41 +417,51 @@
             }
         });
 
-        function removeTag(closeBtn) {
-            const tagElement = closeBtn.parentElement;
-            const tagText = tagElement.textContent.trim().replace('×', '');
-            
-            // Remove from tags array
-            const index = tags.indexOf(tagText);
-            if (index > -1) {
-                tags.splice(index, 1);
-            }
-            
-            // Remove from DOM
-            tagsContainer.removeChild(tagElement);
-        }
-
         // Form Submission
         document.getElementById('blogPostForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
-            // Collect form data
-            const formData = {
-                title: document.getElementById('title').value,
-                category: document.getElementById('category').value,
-                readTime: document.getElementById('readTime').value,
-                tags: tags,
-                content: document.getElementById('content').value
-            };
-            
-            // In a real app, you'd send this to a server
-            console.log('Blog Post Data:', formData);
-            alert('Blog post submitted! Check console for details.');
-            
-            // Optional: Reset form
-            this.reset();
-            tagsContainer.innerHTML = '';
-            tags.length = 0;
+            try {
+                // Collect form data
+                const title = document.getElementById('title').value;
+                const category = document.getElementById('category').value;
+                const readTime = document.getElementById('readTime').value;
+                const content = document.getElementById('content').value;
+                
+                // Validate required fields
+                if (!title || !category || !readTime || !content) {
+                    alert("Please fill all required fields");
+                    return;
+                }
+                
+                // Create a new unique key for each blog post
+                const newPostRef = push(ref(database, 'posts'));
+                
+                // Save data to Firebase
+                set(newPostRef, {
+                    title: title,
+                    category: category,
+                    readTime: readTime,
+                    tags: tags, // Store the array of tags
+                    content: content,
+                    createdAt: new Date().toISOString()
+                })
+                .then(() => {
+                    alert("Blog post submitted successfully!");
+                    
+                    // Reset form
+                    this.reset();
+                    tagsContainer.innerHTML = '';
+                    tags.length = 0; // Clear tags array
+                })
+                .catch((error) => {
+                    console.error("Error submitting post:", error);
+                    alert("Error submitting post: " + error.message);
+                });
+            } catch (error) {
+                console.error("Submission error:", error);
+                alert("An error occurred: " + error.message);
+            }
         });
     </script>
 </body>
