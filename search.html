@@ -269,6 +269,28 @@
             background-color: #e9ecef;
         }
 
+        /* Loading spinner */
+        .loading {
+            display: none;
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .spinner {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border-left-color: #6366f1;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
         /* Responsive Design */
         @media (max-width: 1000px) {
             .nav-links {
@@ -319,24 +341,43 @@
                 width: 100%;
             }
         }
+
+        .logo-circle {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 40px; /* Bigger emoji size */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    border: 2px solid #ccc;
+    transition: transform 0.3s ease;
+}
+
+.logo-circle:hover {
+    transform: scale(1.1);
+}
+
+
     </style>
 </head>
 <body>
     <!-- Navigation Bar -->
     <div class="nav-container">
-        <div class="nav-content">
-            <div class="logo-container">
-                <div class="logo">MB</div>
-            </div>
-            
+    <div class="nav-content">
+        <div class="logo-container">
+            <a href="index.html"><div class="logo-circle">🤖</div></a>
+        </div>        
             <div class="nav-menu">
                 <ul class="nav-links" id="navLinks">
                     <li><a href="home.html">Home</a></li>
-                    <li><a href="explore.html">Explore</a></li>
-                    <li><a href="create.html">Create</a></li>
+                    <li><a href="ai.html">AI</a></li>
+                    <li><a href="create3.html">Create</a></li>
                     <li><a href="search.html" class="active">Search</a></li>
                     <li><a href="edit.html">Edit</a></li>
-                    <li><a href="all.html">Blogs</a></li>
+                    <li><a href="all2.html">Blogs</a></li>
                     <li><a href="about.html">About</a></li>
                     <li><a href="contact.html">Contact</a></li>
                     <li><a href="privacy.html">Privacy</a></li>
@@ -374,15 +415,14 @@
                 <select id="sortBy">
                     <option value="newest">Newest First</option>
                     <option value="oldest">Oldest First</option>
-                    <option value="popular">Most Popular</option>
                     <option value="az">A-Z</option>
                     <option value="za">Z-A</option>
                 </select>
             </div>
 
             <div class="filter-group">
-                <label for="readTime">Reading Time</label>
-                <select id="readTime">
+                <label for="readTimeFilter">Reading Time</label>
+                <select id="readTimeFilter">
                     <option value="">Any Length</option>
                     <option value="short">Short (< 5 min)</option>
                     <option value="medium">Medium (5-15 min)</option>
@@ -391,79 +431,85 @@
             </div>
         </div>
 
+        <!-- Loading Spinner -->
+        <div class="loading" id="loadingSpinner">
+            <div class="spinner"></div>
+            <p>Loading blogs...</p>
+        </div>
+
         <!-- Search Results -->
         <div class="search-results" id="searchResults">
-            <!-- Sample result cards to show layout -->
-            <div class="result-card">
-                <div class="result-title">How to Master Web Development in 2025</div>
-                <div class="result-meta">
-                    <span>May 10, 2025</span>
-                    <span>10 min read</span>
-                    <span class="result-category">Technology</span>
-                </div>
-                <p>The complete guide to becoming a web developer in 2025, covering the most in-demand technologies and skills...</p>
-                <div class="result-tags">
-                    <span class="result-tag">web development</span>
-                    <span class="result-tag">programming</span>
-                    <span class="result-tag">careers</span>
-                </div>
-            </div>
+            <!-- Blog posts will be loaded here -->
+        </div>
 
-            <div class="result-card">
-                <div class="result-title">The Future of Mobile Apps: Trends to Watch</div>
-                <div class="result-meta">
-                    <span>May 8, 2025</span>
-                    <span>7 min read</span>
-                    <span class="result-category">Technology</span>
-                </div>
-                <p>Exploring the latest trends in mobile app development and what to expect in the coming years...</p>
-                <div class="result-tags">
-                    <span class="result-tag">mobile apps</span>
-                    <span class="result-tag">tech trends</span>
-                    <span class="result-tag">development</span>
-                </div>
-            </div>
-
-            <div class="result-card">
-                <div class="result-title">5 Meditation Techniques for Busy Professionals</div>
-                <div class="result-meta">
-                    <span>May 5, 2025</span>
-                    <span>5 min read</span>
-                    <span class="result-category">Health</span>
-                </div>
-                <p>Quick and effective meditation practices that can be incorporated into even the busiest schedules...</p>
-                <div class="result-tags">
-                    <span class="result-tag">meditation</span>
-                    <span class="result-tag">mindfulness</span>
-                    <span class="result-tag">stress relief</span>
-                </div>
-            </div>
+        <div id="noResults" style="display: none; text-align: center; padding: 20px;">
+            No blogs found matching your search criteria.
         </div>
 
         <button class="load-more" id="loadMoreBtn">Load More</button>
     </div>
 
-
     <div id="feaa"></div>
 
-    <script>
+    <script type="module">
+        // Import Firebase modules
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.7.3/firebase-app.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.7.3/firebase-analytics.js";
+        import { getDatabase, ref, onValue, query, orderByChild, limitToFirst, startAt, endAt, get } from "https://www.gstatic.com/firebasejs/11.7.3/firebase-database.js";
 
-// Load footer
-    fetch('f1.html')
-      .then(res => res.text())
-      .then(data => {
-        document.getElementById('feaa').innerHTML = data;
-      });
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyDbDE0qGjNOBJlhcmp31ej_Q9YDCtSQBCo",
+            authDomain: "editable-database-9d7a7.firebaseapp.com",
+            projectId: "editable-database-9d7a7",
+            storageBucket: "editable-database-9d7a7.firebasestorage.app",
+            messagingSenderId: "859479978156",
+            appId: "1:859479978156:web:cf7005d11f4438992b2f09",
+            measurementId: "G-629CLB3EZN"
+        };
 
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const analytics = getAnalytics(app);
+        const database = getDatabase(app);
 
-        // Mobile Menu Toggle
+        // Get DOM elements
+        const searchInput = document.getElementById('searchInput');
+        const searchButton = document.getElementById('searchButton');
+        const categoryFilter = document.getElementById('categoryFilter');
+        const sortBy = document.getElementById('sortBy');
+        const readTimeFilter = document.getElementById('readTimeFilter');
+        const searchResults = document.getElementById('searchResults');
+        const loadMoreBtn = document.getElementById('loadMoreBtn');
+        const loadingSpinner = document.getElementById('loadingSpinner');
+        const noResults = document.getElementById('noResults');
+
+        // Store all blog posts
+        let allPosts = [];
+        // Number of posts to display at once
+        const postsPerPage = 5;
+        // Current page
+        let currentPage = 1;
+
+        // Load all blog posts when the page loads
         document.addEventListener('DOMContentLoaded', function() {
+            // Mobile menu functionality
+            setupMobileMenu();
+            
+            // Load blog posts from Firebase
+            loadAllPosts();
+            
+            // Set up event listeners
+            setupEventListeners();
+        });
+
+        // Setup mobile menu
+        function setupMobileMenu() {
             const menuToggle = document.getElementById('menuToggle');
             const navLinks = document.getElementById('navLinks');
             
             menuToggle.addEventListener('click', function() {
                 navLinks.classList.toggle('active');
-                
                 // Toggle menu icon
                 this.innerHTML = navLinks.classList.contains('active') ? '✕' : '☰';
             });
@@ -475,58 +521,239 @@
                     menuToggle.innerHTML = '☰';
                 });
             });
+        }
 
-            // Search functionality
-            const searchButton = document.getElementById('searchButton');
-            const searchInput = document.getElementById('searchInput');
-            const categoryFilter = document.getElementById('categoryFilter');
-            const sortBy = document.getElementById('sortBy');
-            const readTime = document.getElementById('readTime');
-            const loadMoreBtn = document.getElementById('loadMoreBtn');
+        // Load all posts from Firebase
+        function loadAllPosts() {
+            showLoading(true);
             
+            const postsRef = ref(database, 'posts');
+            
+            onValue(postsRef, (snapshot) => {
+                allPosts = [];
+                
+                if (snapshot.exists()) {
+                    snapshot.forEach((childSnapshot) => {
+                        const postId = childSnapshot.key;
+                        const postData = childSnapshot.val();
+                        
+                        // Add post to array with its ID
+                        allPosts.push({
+                            id: postId,
+                            ...postData
+                        });
+                    });
+                    
+                    // Initial display of posts
+                    displayFilteredPosts();
+                } else {
+                    showNoResults(true);
+                }
+                
+                showLoading(false);
+            }, (error) => {
+                console.error("Error loading posts:", error);
+                showLoading(false);
+                alert("Error loading posts. Please try again later.");
+            });
+        }
+
+        // Set up event listeners
+        function setupEventListeners() {
+            // Search button click
             searchButton.addEventListener('click', function() {
-                performSearch();
+                currentPage = 1;
+                displayFilteredPosts();
             });
             
+            // Search on Enter key
             searchInput.addEventListener('keypress', function(e) {
                 if (e.key === 'Enter') {
-                    performSearch();
+                    currentPage = 1;
+                    displayFilteredPosts();
                 }
             });
             
             // Filter change triggers search
-            categoryFilter.addEventListener('change', performSearch);
-            sortBy.addEventListener('change', performSearch);
-            readTime.addEventListener('change', performSearch);
-            
-            // Load more functionality
-            loadMoreBtn.addEventListener('click', function() {
-                // In a real app, this would load more results
-                alert('In a real application, this would load more search results');
+            categoryFilter.addEventListener('change', function() {
+                currentPage = 1;
+                displayFilteredPosts();
             });
             
-            function performSearch() {
-                const query = searchInput.value;
-                const category = categoryFilter.value;
-                const sort = sortBy.value;
-                const time = readTime.value;
+            sortBy.addEventListener('change', function() {
+                currentPage = 1;
+                displayFilteredPosts();
+            });
+            
+            readTimeFilter.addEventListener('change', function() {
+                currentPage = 1;
+                displayFilteredPosts();
+            });
+            
+            // Load more button
+            loadMoreBtn.addEventListener('click', function() {
+                currentPage++;
+                displayFilteredPosts(true); // Append to existing results
+            });
+            
+            // Load footer
+            fetch('f2.html')
+                .then(res => res.text())
+                .then(data => {
+                    document.getElementById('feaa').innerHTML = data;
+                })
+                .catch(err => {
+                    console.error("Error loading footer:", err);
+                });
+        }
+
+        // Filter and display posts
+        function displayFilteredPosts(append = false) {
+            const searchQuery = searchInput.value.toLowerCase();
+            const categoryValue = categoryFilter.value;
+            const sortValue = sortBy.value;
+            const readTimeValue = readTimeFilter.value;
+            
+            // Filter posts based on search query and filters
+            let filteredPosts = allPosts.filter(post => {
+                // Search by title or content
+                const matchesSearch = searchQuery === '' || 
+                    (post.title && post.title.toLowerCase().includes(searchQuery)) || 
+                    (post.content && post.content.toLowerCase().includes(searchQuery));
                 
-                // In a real app, this would send the search parameters to a server
-                console.log('Search parameters:', {
-                    query: query,
-                    category: category,
-                    sortBy: sort,
-                    readingTime: time
+                // Filter by category
+                const matchesCategory = categoryValue === '' || post.category === categoryValue;
+                
+                // Filter by reading time
+                let matchesReadTime = true;
+                if (readTimeValue) {
+                    const readTime = parseInt(post.readTime) || 0;
+                    
+                    if (readTimeValue === 'short') {
+                        matchesReadTime = readTime < 5;
+                    } else if (readTimeValue === 'medium') {
+                        matchesReadTime = readTime >= 5 && readTime <= 15;
+                    } else if (readTimeValue === 'long') {
+                        matchesReadTime = readTime > 15;
+                    }
+                }
+                
+                return matchesSearch && matchesCategory && matchesReadTime;
+            });
+            
+            // Sort posts
+            filteredPosts = sortPosts(filteredPosts, sortValue);
+            
+            // Display posts
+            if (!append) {
+                searchResults.innerHTML = '';
+            }
+            
+            // Calculate which posts to show based on pagination
+            const startIndex = append ? (currentPage - 1) * postsPerPage : 0;
+            const endIndex = currentPage * postsPerPage;
+            const postsToShow = filteredPosts.slice(startIndex, endIndex);
+            
+            if (postsToShow.length === 0 && !append) {
+                showNoResults(true);
+                loadMoreBtn.style.display = 'none';
+            } else {
+                showNoResults(false);
+                
+                postsToShow.forEach(post => {
+                    const postElement = createPostElement(post);
+                    searchResults.appendChild(postElement);
                 });
                 
-                // For demo purposes, just show an alert
-                if (query) {
-                    alert(`Searching for "${query}" with selected filters`);
-                } else {
-                    alert('Filtering results with selected options');
+                // Show/hide load more button based on if there are more posts
+                loadMoreBtn.style.display = endIndex < filteredPosts.length ? 'block' : 'none';
+            }
+        }
+
+        // Create HTML element for a blog post
+        function createPostElement(post) {
+            const postDiv = document.createElement('div');
+            postDiv.className = 'result-card';
+            
+            // Format date
+            const date = post.createdAt ? new Date(post.createdAt) : new Date();
+            const formattedDate = `${date.toLocaleString('default', { month: 'short' })} ${date.getDate()}, ${date.getFullYear()}`;
+            
+            // Get category label
+            const categoryMap = {
+                'tech': 'Technology',
+                'lifestyle': 'Lifestyle',
+                'education': 'Education',
+                'health': 'Health'
+            };
+            
+            const categoryLabel = categoryMap[post.category] || post.category || '';
+            
+            // Create tags elements
+            let tagsHTML = '';
+            if (post.tags) {
+                if (Array.isArray(post.tags)) {
+                    // If tags is already an array
+                    post.tags.forEach(tag => {
+                        tagsHTML += `<span class="result-tag">${tag}</span>`;
+                    });
+                } else if (typeof post.tags === 'string') {
+                    // If tags is a string, create a single tag
+                    tagsHTML = `<span class="result-tag">${post.tags}</span>`;
                 }
             }
-        });
+            
+            // Get excerpt from content
+            const excerpt = post.content ? (post.content.length > 150 ? post.content.substring(0, 150) + '...' : post.content) : '';
+            
+            postDiv.innerHTML = `
+                <div class="result-title">${post.title || 'Untitled Post'}</div>
+                <div class="result-meta">
+                    <span>${formattedDate}</span>
+                    <span>${post.readTime || '0'} min read</span>
+                    <span class="result-category">${categoryLabel}</span>
+                </div>
+                <p>${excerpt}</p>
+                <div class="result-tags">
+                    ${tagsHTML}
+                </div>
+            `;
+            
+            // Add click event to show full post (you would need to implement this)
+            postDiv.querySelector('.result-title').addEventListener('click', () => {
+                // This would navigate to the full post view in a real application
+                alert(`Viewing full post: ${post.title}`);
+                // window.location.href = `view-post.html?id=${post.id}`;
+            });
+            
+            return postDiv;
+        }
+
+        // Sort posts based on selected option
+        function sortPosts(posts, sortOption) {
+            switch(sortOption) {
+                case 'newest':
+                    return posts.sort((a, b) => new Date(b.createdAt || 0) - new Date(a.createdAt || 0));
+                case 'oldest':
+                    return posts.sort((a, b) => new Date(a.createdAt || 0) - new Date(b.createdAt || 0));
+                case 'az':
+                    return posts.sort((a, b) => (a.title || '').localeCompare(b.title || ''));
+                case 'za':
+                    return posts.sort((a, b) => (b.title || '').localeCompare(a.title || ''));
+                default:
+                    return posts;
+            }
+        }
+
+        // Show/hide loading spinner
+        function showLoading(show) {
+            loadingSpinner.style.display = show ? 'block' : 'none';
+        }
+
+        // Show/hide no results message
+        function showNoResults(show) {
+            noResults.style.display = show ? 'block' : 'none';
+        }
     </script>
 </body>
 </html>
