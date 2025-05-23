@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -146,6 +147,18 @@
             100% {
                 transform: scale(1.2);
                 opacity: 0.1;
+            }
+        }
+
+        @keyframes float-slow {
+            0% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-15px) rotate(5deg);
+            }
+            100% {
+                transform: translateY(5px) rotate(-5deg);
             }
         }
 
@@ -357,6 +370,7 @@
             animation: slideInRight 0.8s ease forwards;
             animation-delay: 0.5s;
             opacity: 0;
+            background: linear-gradient(135deg, #a46efc, #c65df0);
         }
 
         .auth-image img {
@@ -477,9 +491,17 @@
             opacity: 0;
         }
 
-        .terms-privacy input {
+        .terms-privacy input[type="checkbox"] {
             margin-top: 5px;
             margin-right: 10px;
+            width: auto;
+            padding: 0;
+            transform: scale(1.2);
+        }
+
+        .terms-privacy label {
+            font-size: 14px;
+            margin-bottom: 0;
         }
 
         .social-login {
@@ -739,20 +761,6 @@
         </svg>
     </div>
     
-    <style>
-        @keyframes float-slow {
-            0% {
-                transform: translateY(0) rotate(0deg);
-            }
-            50% {
-                transform: translateY(-15px) rotate(5deg);
-            }
-            100% {
-                transform: translateY(5px) rotate(-5deg);
-            }
-        }
-    </style>
-    
     <!-- Signup Section -->
     <section class="auth-section">
         <div class="container">
@@ -791,6 +799,10 @@
                             </div>
                         </div>
 
+                        <div class="terms-privacy">
+                            <input type="checkbox" id="agree" name="agree" required>
+                            <label for="agree">I agree to the <a href="#" target="_blank">Terms of Service</a> and <a href="#" target="_blank">Privacy Policy</a></label>
+                        </div>
                   
                         <button type="submit" class="btn btn-primary btn-block">Sign Up</button>
                     </form>
@@ -803,12 +815,19 @@
                     </div>
 
                     <div class="auth-redirect">
-                        Already have an account? <a href="login.html">Login here</a>
+                        Already have an account? <a href="#" onclick="showLoginMessage()">Login here</a>
                     </div>
                 </div>
 
                 <div class="auth-image">
-                    <img src="project/signup.jpg" alt="Signup Illustration">
+                    <!-- Placeholder image with gradient background -->
+                    <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 24px; color: white; text-align: center;">
+                        <div>
+                            <i class="fas fa-user-plus" style="font-size: 64px; margin-bottom: 20px;"></i>
+                            <h3>Welcome to BlogSphere</h3>
+                            <p>Join thousands of writers sharing their stories</p>
+                        </div>
+                    </div>
                     <div class="auth-overlay">
                    
                     </div>
