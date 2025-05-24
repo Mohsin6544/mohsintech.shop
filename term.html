@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+
+        <link rel="icon" href="project/logo1.png" type="image/png">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms of Service - BlogSphere</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .popup-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .popup-container {
+            background: white;
+            border-radius: 25px;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+            max-width: 800px;
+            width: 90%;
+            max-height: 90vh;
+            position: relative;
+            transform: scale(0.8) translateY(50px);
+            transition: transform 0.3s ease;
+            overflow: hidden;
+        }
+
+        .popup-overlay.active .popup-container {
+            transform: scale(1) translateY(0);
+        }
+
+        .popup-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 30px;
+            text-align: center;
+            position: relative;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .close-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            border-color: rgba(255, 255, 255, 0.5);
+            transform: rotate(90deg);
+        }
+
+        .close-btn::before,
+        .close-btn::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 2px;
+            background: white;
+            border-radius: 2px;
+        }
+
+        .close-btn::before {
+            transform: rotate(45deg);
+        }
+
+        .close-btn::after {
+            transform: rotate(-45deg);
+        }
+
+        .popup-title {
+            color: white;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .popup-subtitle {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 1.1rem;
+            font-weight: 300;
+        }
+
+        .popup-content {
+            padding: 40px;
+            max-height: 60vh;
+            overflow-y: auto;
+            line-height: 1.8;
+            color: #333;
+        }
+
+        .popup-content::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .popup-content::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+
+        .popup-content::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 10px;
+        }
+
+        .popup-content::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, #5a6fd8, #6a4190);
+        }
+
+        .section {
+            margin-bottom: 35px;
+        }
+
+        .section-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #667eea;
+            margin-bottom: 15px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #f0f2ff;
+            position: relative;
+        }
+
+        .section-title::before {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 2px;
+        }
+
+        .section-content {
+            font-size: 1rem;
+            color: #555;
+            text-align: justify;
+        }
+
+        .highlight {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 600;
+        }
+
+        .important-note {
+            background: linear-gradient(135deg, #ffeaa7, #fdcb6e);
+            padding: 20px;
+            border-radius: 15px;
+            border-left: 5px solid #e17055;
+            margin: 25px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .important-note h4 {
+            color: #d63031;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        ul {
+            padding-left: 25px;
+            margin: 15px 0;
+        }
+
+        li {
+            margin-bottom: 8px;
+            color: #666;
+        }
+
+
+
+        .floating-elements {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .floating-element {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .floating-element:nth-child(1) {
+            width: 80px;
+            height: 80px;
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .floating-element:nth-child(2) {
+            width: 60px;
+            height: 60px;
+            top: 60%;
+            right: 15%;
+            animation-delay: 2s;
+        }
+
+        .floating-element:nth-child(3) {
+            width: 40px;
+            height: 40px;
+            bottom: 20%;
+            left: 20%;
+            animation-delay: 4s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+
+        @media (max-width: 768px) {
+            .popup-container {
+                width: 95%;
+                margin: 10px;
+            }
+            
+            .popup-title {
+                font-size: 2rem;
+            }
+            
+            .popup-content {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+
+    <div class="popup-overlay" id="popupOverlay">
+        <div class="popup-container">
+            <div class="floating-elements">
+                <div class="floating-element"></div>
+                <div class="floating-element"></div>
+                <div class="floating-element"></div>
+            </div>
+            
+            <div class="popup-header">
+                <div class="close-btn" onclick="closePopup()"></div>
+                <h1 class="popup-title">Terms of Service</h1>
+                <p class="popup-subtitle">The following terms should be carefully read before using MyBlog.</p>
+            </div>
+
+            <div class="popup-content">
+                <div class="section">
+                    <h3 class="section-title">1. Overview and Acceptance</h3>
+                    <div class="section-content">
+                        Welcome to <span class="highlight">MyBlog</span>, the leading global platform for storytellers and creative authors.  By making an account, using our services, or accessing them, you attest that you have read, comprehended, and accept these Terms of Service ("Terms") and agree to be bound by them.  You ("User," "you," or "your") and BlogSphere ("we," "us," or "our") agree to these Terms in a binding legal agreement.
+                        
+                        <div class="important-note">
+                            <h4>🚨 Important Information</h4>
+                            <p>You are not permitted to use our services if you disagree with these terms.  You agree to any changes to these Terms by continuing to use BlogSphere after they have been made.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h3 class="section-title">2.Description of the Platform and Services</h3>
+                    <div class="section-content">
+                       A feature-rich platform for creating and sharing content, BlogSphere allows users to:
+                        <ul>
+                            <li>Find popular articles and trending themes.</li>
+                            <li>Use social sharing tools, likes, and comments to interact.</li>
+                            <li>Personalize their profile and display their body of work.</li>
+                            <li>Get data and information on how well their material is performing.</li>
+                            <li>Engage in community events and writing competitions.</li>
+                        </ul>
+                        
+                       Any component of our services may be changed, suspended, or discontinued at any time with appropriate notification to users.
+                     
+                </div>
+
+                <div class="section">
+                    <h3 class="section-title">3.Registration and User Accounts</h3>
+                    <div class="section-content">
+                       You must register for an account and provide accurate, up-to-date, and comprehensive information in order to use some of BlogSphere's features.  You are accountable for:
+                        <ul>
+                            <li>Maintaining the confidentiality of your account credentials</li>
+                            <li>Immediately notifying us of any unauthorized use of your account</li>
+                            <li>Ensuring your contact information remains current and accurate</li>
+                        </ul>
+                        
+                       To register, you must be at least 13 years old.  Consent from parents or guardians is required for users who are 13 to 17 years old.  Additional verification could be necessary for specific account types or activity.
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h3 class="section-title">4. Guidelines for Content and User Behavior</h3>
+                    <div class="section-content">
+                        MyBlog thrives on original, imaginative, and polite content.  You accept the following when using our platform:
+                        
+                        <h4 style="margin: 20px 0 10px 0; color: #667eea;">✅ Acceptable Content:</h4>
+                        <ul>
+                            <li>Original creative writing, articles, and blog posts</li>
+                            <li>Educational and informative content</li>
+                            <li>Personal experiences and storytelling</li>
+                            <li>Properly attributed quotes and references</li>
+                        </ul>
+
+                        <h4 style="margin: 20px 0 10px 0; color: #e17055;">❌ Prohibited Content:</h4>
+                        <ul>
+                            <li>Harassment, bullying, or threatening behavior</li>
+                            <li>Discriminatory content based on race, gender, religion, or other protected characteristics</li>
+                            <li>Spam, promotional content without proper disclosure</li>
+                            <li>Copyright infringement or plagiarized content</li>
+                            <li>Adult content involving minors</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h3 class="section-title">5. Intellectual Property Rights</h3>
+                    <div class="section-content">
+                        <h4 style="margin-bottom: 15px; color: #667eea;">Your Content:</h4>
+                        You retain ownership of all intellectual property rights in the content you create and publish on BlogSphere. However, by publishing content on our platform, you grant us a worldwide, non-exclusive, royalty-free license to:
+                        <ul>
+                            <li>Display, distribute, and promote your content on BlogSphere</li>
+                            <li>Create backups and copies for technical purposes</li>
+                            <li>Allow other users to share and engage with your content</li>
+                            <li>Use excerpts for promotional purposes (with attribution)</li>
+                        </ul>
+
+                        <h4 style="margin: 25px 0 15px 0; color: #667eea;">Our Content:</h4>
+                        All BlogSphere branding, software, design elements, and proprietary features are owned by us and protected by intellectual property laws. You may not copy, modify, or redistribute our proprietary content without explicit written permission.
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h3 class="section-title">6. Privacy & Data Protection</h3>
+                    <div class="section-content">
+                        Your privacy is important to us. Our comprehensive Privacy Policy explains how we collect, use, and protect your personal information. Key highlights include:
+                        <ul>
+                            <li>We collect only necessary information to provide our services</li>
+                            <li>Your personal data is encrypted and securely stored</li>
+                            <li>We never sell your personal information to third parties</li>
+                            <li>You have control over your privacy settings and data</li>
+                            <li>We comply with GDPR, CCPA, and other applicable privacy regulations</li>
+                        </ul>
+                        
+                        By using BlogSphere, you consent to our data practices as outlined in our Privacy Policy, which is incorporated into these Terms by reference.
+                    </div>
+                </div>
+
+                        
+                        <div class="important-note">
+                            <h4>⚖️ Legal Notice</h4>
+                            <p>Certain liability limitations are prohibited in some areas.  In these situations, our responsibility is capped at the highest level allowed by the relevant legislation.</p>
+                        </div>
+                    </div>
+                </div>
+
+               
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openPopup() {
+            const popup = document.getElementById('popupOverlay');
+            popup.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closePopup() {
+            const popup = document.getElementById('popupOverlay');
+            popup.classList.remove('active');
+            document.body.style.overflow = 'auto';
+            
+            // Redirect back to signup page
+            window.location.href = 'signup.html';
+        }
+
+        // Close popup when clicking outside
+        document.getElementById('popupOverlay').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closePopup();
+            }
+        });
+
+        // Close popup with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closePopup();
+            }
+        });
+
+        // Auto-open popup immediately
+        window.addEventListener('load', function() {
+            openPopup();
+        });
+    </script>
+</body>
+</html>
