@@ -1,11 +1,153 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
+    <link rel="icon" href="project/logo1.png" type="image/png">
+
+     <!-- Essential Meta Tags -->
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Compact Footer</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <!-- Primary SEO Meta Tags -->
+    <title>MyBlog - Creative Technology, Lifestyle & Travel Content Hub | Professional Blogging Platform</title>
+    <meta name="title" content="MyBlog - Creative Technology, Lifestyle & Travel Content Hub | Professional Blogging Platform">
+    <meta name="description" content="Discover inspiring content on technology trends, lifestyle tips, and travel adventures at MyBlog. Where creativity meets insightful thoughts and professional blogging expertise.">
+    <meta name="keywords" content="blog, technology blog, lifestyle blog, travel blog, creative writing, professional blogging, tech trends, lifestyle tips, travel guides, content creation, digital marketing, SEO blog">
+    <meta name="author" content="MyBlog Team">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    <meta name="language" content="English">
+    <meta name="revisit-after" content="7 days">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://mohsintech.shop/">
+    <meta property="og:title" content="MyBlog - Creative Technology, Lifestyle & Travel Content Hub">
+    <meta property="og:description" content="Discover inspiring content on technology trends, lifestyle tips, and travel adventures at MyBlog. Where creativity meets insightful thoughts.">
+    <meta property="og:image" content="https://mohsintech.shop/images/og-image.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:site_name" content="MyBlog">
+    <meta property="og:locale" content="en_US">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://mohsintech.shop/">
+    <meta property="twitter:title" content="MyBlog - Creative Technology, Lifestyle & Travel Content Hub">
+    <meta property="twitter:description" content="Discover inspiring content on technology trends, lifestyle tips, and travel adventures at MyBlog. Where creativity meets insightful thoughts.">
+    <meta property="twitter:image" content="https://mohsintech.shop/images/twitter-image.jpg">
+    <meta property="twitter:site" content="@myblog">
+    <meta property="twitter:creator" content="@myblog">
+    
+    <!-- Additional SEO Meta Tags -->
+    <meta name="theme-color" content="#1e88e5">
+    <meta name="msapplication-TileColor" content="#1e88e5">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://mohsintech.shop/">
+    
+    <!-- Favicon and Icons -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    
+    <!-- Preload Critical Resources -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"></noscript>
+    
+    <!-- Font Awesome Icons -->
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"></noscript>
+    
+    <!-- DNS Prefetch -->
+    <link rel="dns-prefetch" href="//fonts.googleapis.com">
+    <link rel="dns-prefetch" href="//cdnjs.cloudflare.com">
+    <link rel="dns-prefetch" href="//www.facebook.com">
+    <link rel="dns-prefetch" href="//twitter.com">
+    <link rel="dns-prefetch" href="//instagram.com">
+    <link rel="dns-prefetch" href="//linkedin.com">
+    
+    <!-- Structured Data - Organization Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "MyBlog",
+        "description": "Professional blogging platform featuring technology, lifestyle, and travel content",
+        "url": "https://myblog.com",
+        "logo": "https://mohsintech.shop/images/logo.png",
+        "foundingDate": "2023",
+        "sameAs": [
+            "https://www.facebook.com/myblog",
+            "https://twitter.com/myblog",
+            "https://www.instagram.com/myblog",
+            "https://www.linkedin.com/company/myblog"
+        ],
+        "contactPoint": {
+            "@type": "ContactPoint",
+            "contactType": "Customer Service",
+            "url": "https://mohsintech.shop/contact",
+            "availableLanguage": ["English"]
+        },
+        "address": {
+            "@type": "PostalAddress",
+            "addressCountry": "US"
+        }
+    }
+    </script>
+    
+    <!-- Structured Data - Website Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "MyBlog",
+        "description": "Creative technology, lifestyle and travel content hub",
+        "url": "https://myblog.com",
+        "publisher": {
+            "@type": "Organization",
+            "name": "MyBlog",
+            "logo": "https://mohsintech.shop/images/logo.png"
+        },
+        "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://mohsintech.shop/search?q={search_term_string}",
+            "query-input": "required name=search_term_string"
+        }
+    }
+    </script>
+    
+    <!-- Structured Data - Blog Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Blog",
+        "name": "MyBlog - Technology, Lifestyle & Travel",
+        "description": "Professional blog covering technology trends, lifestyle tips, and travel experiences",
+        "url": "https://myblog.com",
+        "author": {
+            "@type": "Organization",
+            "name": "MyBlog Team"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "MyBlog",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://mohsintech.shop/images/logo.png"
+            }
+        },
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://myblog.com"
+        }
+    }
+    </script>
+
     <style>
         :root {
             --primary-color: #1e88e5;
