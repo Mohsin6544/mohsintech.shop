@@ -2,9 +2,133 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
+    <link rel="icon" href="project/logo1.png" type="image/png">
+
+    <!-- Primary Meta Tags -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI Blog Assistant</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <!-- SEO Meta Tags -->
+    <title>AI Blog Assistant - Free Gemini-Powered Blog Writing Tool | Content Creation Made Easy</title>
+    <meta name="description" content="Transform your blogging with our free AI Blog Assistant powered by Google Gemini. Generate high-quality blog content, get writing ideas, edit posts, and boost your content marketing strategy with advanced AI technology.">
+    <meta name="keywords" content="AI blog assistant, blog writing tool, content creation, Gemini AI, blog generator, SEO content, article writer, content marketing, blog ideas, AI writing assistant, free blog tool, automated blogging">
+    <meta name="author" content="AI Blog Assistant Team">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    <meta name="language" content="English">
+    <meta name="revisit-after" content="1 days">
+    <meta name="rating" content="General">
+    <meta name="distribution" content="global">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://mohsintech.shop/ai-blog-assistant">
+    <meta property="og:title" content="AI Blog Assistant - Free Gemini-Powered Blog Writing Tool">
+    <meta property="og:description" content="Create amazing blog content effortlessly with our AI-powered writing assistant. Generate ideas, write articles, and optimize your content strategy with Google Gemini AI.">
+    <meta property="og:image" content="https://mohsintech.shop/images/ai-blog-assistant-og.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="AI Blog Assistant Interface - Blog Writing Made Easy">
+    <meta property="og:site_name" content="AI Blog Assistant">
+    <meta property="og:locale" content="en_US">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://mohsintech.shop/ai-blog-assistant">
+    <meta name="twitter:title" content="AI Blog Assistant - Free Gemini-Powered Blog Writing Tool">
+    <meta name="twitter:description" content="Create amazing blog content effortlessly with our AI-powered writing assistant. Generate ideas, write articles, and optimize your content strategy with Google Gemini AI.">
+    <meta name="twitter:image" content="https://mohsintech.shop/images/ai-blog-assistant-twitter.jpg">
+    <meta name="twitter:image:alt" content="AI Blog Assistant - Blog Writing Tool Interface">
+    <meta name="twitter:creator" content="@yourtwitterhandle">
+    <meta name="twitter:site" content="@yourtwitterhandle">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://mohsintech.shop/ai-blog-assistant">
+    
+    <!-- Preconnect for Performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://generativelanguage.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://aistudio.google.com" crossorigin>
+    
+    <!-- Favicon and Icons -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="theme-color" content="#7351e4">
+    <meta name="msapplication-TileColor" content="#7351e4">
+    
+    <!-- Structured Data - WebApplication Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "AI Blog Assistant",
+        "description": "Free AI-powered blog writing assistant using Google Gemini to help create, edit, and optimize blog content",
+        "url": "https://mohsintech.shop/ai-blog-assistant",
+        "applicationCategory": "ProductivityApplication",
+        "operatingSystem": "Web Browser",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "creator": {
+            "@type": "Organization",
+            "name": "AI Blog Assistant Team"
+        },
+        "featureList": [
+            "AI-powered content generation",
+            "Blog idea generation",
+            "Content editing assistance",
+            "SEO optimization suggestions",
+            "Multiple language support",
+            "Real-time chat interface"
+        ],
+        "screenshot": "https://mohsintech.shop/images/ai-blog-assistant-screenshot.jpg"
+    }
+    </script>
+    
+    <!-- Structured Data - BreadcrumbList Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://mohsintech.shop"
+            },
+            {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "AI Blog Assistant",
+                "item": "https://mohsintech.shop/ai-blog-assistant"
+            }
+        ]
+    }
+    </script>
+    
+    <!-- Structured Data - Organization Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "AI Blog Assistant",
+        "url": "https://mohsintech.shop",
+        "logo": "https://mohsintech.shop/logo.png",
+        "sameAs": [
+            "https://twitter.com/yourtwitterhandle",
+            "https://facebook.com/yourfacebookpage",
+            "https://linkedin.com/company/yourcompany"
+        ]
+    }
+    </script>
+
     <style>
         * {
             margin: 0;
@@ -543,122 +667,6 @@
             }
         }
         
-        /* API Key Modal */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            z-index: 2000;
-            justify-content: center;
-            align-items: center;
-        }
-        
-        .modal-content {
-            background-color: white;
-            padding: 30px;
-            border-radius: 12px;
-            width: 90%;
-            max-width: 500px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
-            animation: modalFadeIn 0.3s ease-out;
-        }
-        
-        @keyframes modalFadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-        
-        .modal-title {
-            font-size: 20px;
-            font-weight: bold;
-            color: #333;
-        }
-        
-        .close-modal {
-            background: none;
-            border: none;
-            font-size: 24px;
-            cursor: pointer;
-            color: #888;
-            transition: color 0.3s ease;
-        }
-        
-        .close-modal:hover {
-            color: #333;
-        }
-        
-        .modal-body {
-            margin-bottom: 20px;
-        }
-        
-        .api-key-input {
-            width: 100%;
-            padding: 12px 15px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            font-size: 16px;
-            margin-bottom: 15px;
-            transition: border-color 0.3s ease;
-        }
-        
-        .api-key-input:focus {
-            border-color: #7351e4;
-            outline: none;
-        }
-        
-        .modal-footer {
-            display: flex;
-            justify-content: flex-end;
-            gap: 10px;
-        }
-        
-        .modal-button {
-            padding: 10px 20px;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        
-        .modal-button.primary {
-            background-color: #7351e4;
-            color: white;
-            border: none;
-        }
-        
-        .modal-button.primary:hover {
-            background-color: #5a3bc0;
-            transform: translateY(-2px);
-        }
-        
-        .modal-button.secondary {
-            background-color: #f5f5f5;
-            color: #333;
-            border: 1px solid #ddd;
-        }
-        
-        .modal-button.secondary:hover {
-            background-color: #e9e9e9;
-        }
-        
         /* Responsive Design */
         @media (max-width: 768px) {
             .header {
@@ -694,10 +702,6 @@
             .message-content {
                 max-width: 90%;
             }
-            
-            .modal-content {
-                padding: 20px;
-            }
         }
 
 
@@ -718,8 +722,6 @@
 .logo-circle:hover {
     transform: scale(1.1);
 }
-
-
     </style>
 </head>
 <body>
@@ -780,20 +782,6 @@
                         </svg>
                         Clear Chat
                     </button>
-                    <button class="ai-option-button" id="api-key-button">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M12 2v4"></path>
-                            <path d="m16 6 2 2"></path>
-                            <path d="M18 12h4"></path>
-                            <path d="m16 18 2-2"></path>
-                            <path d="M12 22v-4"></path>
-                            <path d="m8 18-2 2"></path>
-                            <path d="M6 12H2"></path>
-                            <path d="m8 6-2-2"></path>
-                            <circle cx="12" cy="12" r="4"></circle>
-                        </svg>
-                        API Key
-                    </button>
                 </div>
             </div>
             
@@ -803,8 +791,6 @@
                     <div class="avatar ai-avatar">AI</div>
                     <div class="message-content">
                         Hello! I'm your AI blog assistant powered by Google Gemini. How can I help you with your blog today? I can help with writing articles, generating ideas, editing content, or answering any questions you have about blogging.
-                        <br><br>
-                        Please make sure to set your Google AI Studio API key by clicking the "API Key" button above.
                     </div>
                 </div>
             </div>
@@ -824,293 +810,217 @@
         </div>
     </div>
 
-    <!-- API Key Modal -->
-    <div class="modal" id="api-key-modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <div class="modal-title">Set Google AI Studio API Key</div>
-                <button class="close-modal" id="close-modal">&times;</button>
-            </div>
-            <div class="modal-body">
-                <p>Enter your Google AI Studio API key to use the Gemini model. You can get your API key from <a href="https://aistudio.google.com/" target="_blank">Google AI Studio</a>.</p>
-                <input type="password" class="api-key-input" id="api-key-input" placeholder="Enter your API key...">
-                <p><small>Your API key is stored locally in your browser and is never sent to our servers.</small></p>
-            </div>
-            <div class="modal-footer">
-                <button class="modal-button secondary" id="cancel-button">Cancel</button>
-                <button class="modal-button primary" id="save-api-key-button">Save</button>
-            </div>
-        </div>
-    </div>
-
     <div id="feaa"></div>
 
     <script>
-
-// Load footer
+    // Load footer
     fetch('f2.html')
       .then(res => res.text())
       .then(data => {
         document.getElementById('feaa').innerHTML = data;
       });
 
-
-
-        document.addEventListener('DOMContentLoaded', function() {
-            // DOM Elements
-            const textarea = document.getElementById('message-input');
-            const sendButton = document.getElementById('send-button');
-            const messagesContainer = document.getElementById('messages-container');
-            const mobileMenuButton = document.querySelector('.mobile-menu-button');
-            const mobileMenu = document.querySelector('.mobile-menu');
-            const closeMenu = document.querySelector('.close-menu');
-            const overlay = document.querySelector('.overlay');
-            const clearChatButton = document.getElementById('clear-chat-button');
-            const apiKeyButton = document.getElementById('api-key-button');
-            const apiKeyModal = document.getElementById('api-key-modal');
-            const closeModalButton = document.getElementById('close-modal');
-            const cancelButton = document.getElementById('cancel-button');
-            const saveApiKeyButton = document.getElementById('save-api-key-button');
-            const apiKeyInput = document.getElementById('api-key-input');
+    document.addEventListener('DOMContentLoaded', function() {
+        // DOM Elements
+        const textarea = document.getElementById('message-input');
+        const sendButton = document.getElementById('send-button');
+        const messagesContainer = document.getElementById('messages-container');
+        const mobileMenuButton = document.querySelector('.mobile-menu-button');
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const closeMenu = document.querySelector('.close-menu');
+        const overlay = document.querySelector('.overlay');
+        const clearChatButton = document.getElementById('clear-chat-button');
+        
+        // Your API key (replace with your actual key)
+        const apiKey = "AIzaSyCI5N4IuyvwF1BFz54J60RRdtHmQqRPv2M";
+        
+        // Stagger animation for existing messages
+        const messages = document.querySelectorAll('.message');
+        messages.forEach((message, index) => {
+            message.style.animationDelay = `${index * 0.15}s`;
+        });
+        
+        // Mobile menu functionality
+        mobileMenuButton.addEventListener('click', function() {
+            mobileMenu.classList.add('active');
+            overlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+        
+        function closeMenuFunc() {
+            mobileMenu.classList.remove('active');
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+        
+        closeMenu.addEventListener('click', closeMenuFunc);
+        overlay.addEventListener('click', closeMenuFunc);
+        
+        // Auto-resize textarea
+        textarea.addEventListener('input', function() {
+            this.style.height = 'auto';
+            this.style.height = Math.min(this.scrollHeight, 120) + 'px';
             
-            // Load API key from localStorage if available
-            let apiKey = localStorage.getItem('geminiApiKey');
-            if (apiKey) {
-                apiKeyInput.value = apiKey;
+            // Enable/disable send button
+            sendButton.disabled = this.value.trim().length === 0;
+        });
+        
+        // Send message on button click
+        sendButton.addEventListener('click', function() {
+            if (textarea.value.trim().length > 0) {
+                sendMessage(textarea.value.trim());
             }
-            
-            // Stagger animation for existing messages
-            const messages = document.querySelectorAll('.message');
-            messages.forEach((message, index) => {
-                message.style.animationDelay = `${index * 0.15}s`;
-            });
-            
-            // Mobile menu functionality
-            mobileMenuButton.addEventListener('click', function() {
-                mobileMenu.classList.add('active');
-                overlay.classList.add('active');
-                document.body.style.overflow = 'hidden';
-            });
-            
-            function closeMenuFunc() {
-                mobileMenu.classList.remove('active');
-                overlay.classList.remove('active');
-                document.body.style.overflow = '';
+        });
+        
+        // Send message on Enter (Shift+Enter for new line)
+        textarea.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                if (this.value.trim().length > 0) {
+                    sendMessage(this.value.trim());
+                }
             }
+        });
+        
+        // Function to send message to Gemini API
+        async function sendMessage(text) {
+            // Create and append user message
+            const userMessageElement = document.createElement('div');
+            userMessageElement.className = 'message user-message';
+            userMessageElement.innerHTML = `
+                <div class="avatar user-avatar">U</div>
+                <div class="message-content">${escapeHtml(text)}</div>
+            `;
+            messagesContainer.appendChild(userMessageElement);
             
-            closeMenu.addEventListener('click', closeMenuFunc);
-            overlay.addEventListener('click', closeMenuFunc);
+            // Clear input
+            textarea.value = '';
+            textarea.style.height = 'auto';
+            sendButton.disabled = true;
             
-            // Auto-resize textarea
-            textarea.addEventListener('input', function() {
-                this.style.height = 'auto';
-                this.style.height = Math.min(this.scrollHeight, 120) + 'px';
-                
-                // Enable/disable send button
-                sendButton.disabled = this.value.trim().length === 0;
-            });
+            // Scroll to bottom with smooth animation
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
             
-            // Send message on button click
-            sendButton.addEventListener('click', function() {
-                if (textarea.value.trim().length > 0) {
-                    sendMessage(textarea.value.trim());
-                }
-            });
+            // Add typing indicator
+            const typingIndicator = document.createElement('div');
+            typingIndicator.className = 'message ai-message typing-message';
+            typingIndicator.innerHTML = `
+                <div class="avatar ai-avatar">AI</div>
+                <div class="message-content typing-indicator">
+                    <div class="typing-dot"></div>
+                    <div class="typing-dot"></div>
+                    <div class="typing-dot"></div>
+                </div>
+            `;
+            messagesContainer.appendChild(typingIndicator);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
             
-            // Send message on Enter (Shift+Enter for new line)
-            textarea.addEventListener('keydown', function(e) {
-                if (e.key === 'Enter' && !e.shiftKey) {
-                    e.preventDefault();
-                    if (this.value.trim().length > 0) {
-                        sendMessage(this.value.trim());
-                    }
-                }
-            });
-            
-            // Function to send message to Gemini API
-            async function sendMessage(text) {
-                // Check if API key is set
-                if (!apiKey) {
-                    showApiKeyModal();
-                    addErrorMessage('Please set your Google AI Studio API key first.');
-                    return;
-                }
-                
-                // Create and append user message
-                const userMessageElement = document.createElement('div');
-                userMessageElement.className = 'message user-message';
-                userMessageElement.innerHTML = `
-                    <div class="avatar user-avatar">U</div>
-                    <div class="message-content">${escapeHtml(text)}</div>
-                `;
-                messagesContainer.appendChild(userMessageElement);
-                
-                // Clear input
-                textarea.value = '';
-                textarea.style.height = 'auto';
-                sendButton.disabled = true;
-                
-                // Scroll to bottom with smooth animation
-                messagesContainer.scrollTop = messagesContainer.scrollHeight;
-                
-                // Add typing indicator
-                const typingIndicator = document.createElement('div');
-                typingIndicator.className = 'message ai-message typing-message';
-                typingIndicator.innerHTML = `
-                    <div class="avatar ai-avatar">AI</div>
-                    <div class="message-content typing-indicator">
-                        <div class="typing-dot"></div>
-                        <div class="typing-dot"></div>
-                        <div class="typing-dot"></div>
-                    </div>
-                `;
-                messagesContainer.appendChild(typingIndicator);
-                messagesContainer.scrollTop = messagesContainer.scrollHeight;
-                
-                try {
-                    // Call Gemini API
-                    const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({
-                            contents: [{
-                                parts: [{
-                                    text: `You are an AI blog assistant. The user is a blogger who needs help with their blog. Here is their request: ${text}. Please provide a helpful, detailed response formatted in HTML with proper paragraph breaks, lists, and other formatting as needed.`
-                                }]
+            try {
+                // Call Gemini API
+                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemma-3-27b-it:generateContent?key=${apiKey}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        contents: [{
+                            parts: [{
+                                text: `You are an AI blog assistant. The user is a blogger who needs help with their blog. Here is their request: ${text}. Please provide a helpful, detailed response formatted in HTML with proper paragraph breaks, lists, and other formatting as needed.`
                             }]
-                        })
-                    });
-                    
-                    const data = await response.json();
-                    
-                    // Remove typing indicator
-                    messagesContainer.removeChild(typingIndicator);
-                    
-                    if (data.candidates && data.candidates[0].content.parts[0].text) {
-                        // Create AI message element with the response
-                        const aiMessage = document.createElement('div');
-                        aiMessage.className = 'message ai-message';
-                        aiMessage.innerHTML = `
-                            <div class="avatar ai-avatar">AI</div>
-                            <div class="message-content">${data.candidates[0].content.parts[0].text}</div>
-                        `;
-                        messagesContainer.appendChild(aiMessage);
-                    } else if (data.error) {
-                        // Show API error
-                        addErrorMessage(`API Error: ${data.error.message}`);
-                    } else {
-                        // Unknown error
-                        addErrorMessage('Sorry, there was an error processing your request.');
-                    }
-                } catch (error) {
-                    // Remove typing indicator
-                    messagesContainer.removeChild(typingIndicator);
-                    
-                    // Show error message
-                    addErrorMessage(`Network Error: ${error.message}`);
-                }
-                
-                // Scroll to bottom again
-                messagesContainer.scrollTop = messagesContainer.scrollHeight;
-            }
-            
-            // Function to add error message
-            function addErrorMessage(text) {
-                const errorMessage = document.createElement('div');
-                errorMessage.className = 'message ai-message';
-                errorMessage.innerHTML = `
-                    <div class="avatar ai-avatar">!</div>
-                    <div class="message-content" style="background-color: #ffebee; color: #c62828;">${escapeHtml(text)}</div>
-                `;
-                messagesContainer.appendChild(errorMessage);
-                messagesContainer.scrollTop = messagesContainer.scrollHeight;
-            }
-            
-            // Function to escape HTML
-            function escapeHtml(unsafe) {
-                return unsafe
-                    .replace(/&/g, "&amp;")
-                    .replace(/</g, "&lt;")
-                    .replace(/>/g, "&gt;")
-                    .replace(/"/g, "&quot;")
-                    .replace(/'/g, "&#039;");
-            }
-            
-            // Clear chat functionality
-            clearChatButton.addEventListener('click', function() {
-                // Add fade-out animation to all messages
-                const allMessages = document.querySelectorAll('.message');
-                allMessages.forEach((message, index) => {
-                    message.style.animation = `fadeOut 0.3s ease forwards ${index * 0.05}s`;
+                        }]
+                    })
                 });
                 
-                // Clear messages after animation completes
-                setTimeout(() => {
-                    messagesContainer.innerHTML = '';
-                    
-                    // Add welcome message
-                    const welcomeMessage = document.createElement('div');
-                    welcomeMessage.className = 'message ai-message';
-                    welcomeMessage.innerHTML = `
+                const data = await response.json();
+                
+                // Remove typing indicator
+                messagesContainer.removeChild(typingIndicator);
+                
+                if (data.candidates && data.candidates[0].content.parts[0].text) {
+                    // Create AI message element with the response
+                    const aiMessage = document.createElement('div');
+                    aiMessage.className = 'message ai-message';
+                    aiMessage.innerHTML = `
                         <div class="avatar ai-avatar">AI</div>
-                        <div class="message-content">Hello! I'm your AI blog assistant powered by Google Gemini. How can I help you with your blog today? I can help with writing articles, generating ideas, editing content, or answering any questions you have about blogging.</div>
+                        <div class="message-content">${data.candidates[0].content.parts[0].text}</div>
                     `;
-                    messagesContainer.appendChild(welcomeMessage);
-                }, allMessages.length * 50 + 300);
-            });
-            
-            // API Key Modal functionality
-            function showApiKeyModal() {
-                apiKeyModal.style.display = 'flex';
-                setTimeout(() => {
-                    apiKeyModal.style.opacity = '1';
-                }, 10);
+                    messagesContainer.appendChild(aiMessage);
+                } else if (data.error) {
+                    // Show API error
+                    addErrorMessage(`API Error: ${data.error.message}`);
+                } else {
+                    // Unknown error
+                    addErrorMessage('Sorry, there was an error processing your request.');
+                }
+            } catch (error) {
+                // Remove typing indicator
+                messagesContainer.removeChild(typingIndicator);
+                
+                // Show error message
+                addErrorMessage(`Network Error: ${error.message}`);
             }
             
-            function hideApiKeyModal() {
-                apiKeyModal.style.opacity = '0';
-                setTimeout(() => {
-                    apiKeyModal.style.display = 'none';
-                }, 300);
-            }
-            
-            apiKeyButton.addEventListener('click', showApiKeyModal);
-            closeModalButton.addEventListener('click', hideApiKeyModal);
-            cancelButton.addEventListener('click', hideApiKeyModal);
-            
-            saveApiKeyButton.addEventListener('click', function() {
-                const key = apiKeyInput.value.trim();
-                if (key) {
-                    apiKey = key;
-                    localStorage.setItem('geminiApiKey', key);
-                    hideApiKeyModal();
-                    
-                    // Show success message
-                    const successMessage = document.createElement('div');
-                    successMessage.className = 'message ai-message';
-                    successMessage.innerHTML = `
-                        <div class="avatar ai-avatar">✓</div>
-                        <div class="message-content" style="background-color: #e8f5e9; color: #2e7d32;">API key saved successfully! You can now chat with the AI.</div>
-                    `;
-                    messagesContainer.appendChild(successMessage);
-                    messagesContainer.scrollTop = messagesContainer.scrollHeight;
-                }
-            });
-            
-            // Add animation keyframes dynamically
-            const style = document.createElement('style');
-            style.textContent = `
-                @keyframes fadeOut {
-                    to {
-                        opacity: 0;
-                        transform: translateY(-20px);
-                    }
-                }
+            // Scroll to bottom again
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+        
+        // Function to add error message
+        function addErrorMessage(text) {
+            const errorMessage = document.createElement('div');
+            errorMessage.className = 'message ai-message';
+            errorMessage.innerHTML = `
+                <div class="avatar ai-avatar">!</div>
+                <div class="message-content" style="background-color: #ffebee; color: #c62828;">${escapeHtml(text)}</div>
             `;
-            document.head.appendChild(style);
+            messagesContainer.appendChild(errorMessage);
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+        
+        // Function to escape HTML
+        function escapeHtml(unsafe) {
+            return unsafe
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
+        
+        // Clear chat functionality
+        clearChatButton.addEventListener('click', function() {
+            // Add fade-out animation to all messages
+            const allMessages = document.querySelectorAll('.message');
+            allMessages.forEach((message, index) => {
+                message.style.animation = `fadeOut 0.3s ease forwards ${index * 0.05}s`;
+            });
+            
+            // Clear messages after animation completes
+            setTimeout(() => {
+                messagesContainer.innerHTML = '';
+                
+                // Add welcome message
+                const welcomeMessage = document.createElement('div');
+                welcomeMessage.className = 'message ai-message';
+                welcomeMessage.innerHTML = `
+                    <div class="avatar ai-avatar">AI</div>
+                    <div class="message-content">Hello! I'm your AI blog assistant powered by Google Gemini. How can I help you with your blog today? I can help with writing articles, generating ideas, editing content, or answering any questions you have about blogging.</div>
+                `;
+                messagesContainer.appendChild(welcomeMessage);
+            }, allMessages.length * 50 + 300);
         });
+        
+        // Add animation keyframes dynamically
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fadeOut {
+                to {
+                    opacity: 0;
+                    transform: translateY(-20px);
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    });
     </script>
 </body>
 </html>
