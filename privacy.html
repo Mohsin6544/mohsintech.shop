@@ -1,9 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
+
+        <link rel="icon" href="project/logo1.png" type="image/png">
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Privacy Policy - My Blog</title>
+    
+    <!-- SEO Meta Tags -->
+    <title>Privacy Policy | My Blog - Data Protection & User Privacy</title>
+    <meta name="description" content="Read our comprehensive privacy policy to understand how we collect, use, and protect your personal data. Learn about your rights and our commitment to privacy.">
+    <meta name="keywords" content="privacy policy, data protection, personal information, cookies, user rights, data security, GDPR compliance, privacy statement">
+    <meta name="author" content="My Blog">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="Privacy Policy | My Blog - Your Data Protection Guide">
+    <meta property="og:description" content="Understand how we protect your privacy and handle your personal data. Transparent privacy practices explained.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://mohsintech.shop/privacy">
+    <meta property="og:image" content="https://mohsintech.shop/images/privacy-og.jpg">
+    <meta property="og:site_name" content="My Blog">
+    
+    <!-- Twitter Card Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Privacy Policy | My Blog">
+    <meta name="twitter:description" content="Learn about our privacy practices and data protection measures.">
+    <meta name="twitter:image" content="https://mohsintech.shop/images/privacy-twitter.jpg">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://mohsintech.shop/privacy">
+    
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "Privacy Policy",
+        "description": "Privacy policy explaining data collection, usage, and protection practices",
+        "url": "https://mohsintech.shop/privacy",
+        "isPartOf": {
+            "@type": "WebSite",
+            "name": "My Blog",
+            "url": "https://mohsintech.shop"
+        },
+        "about": {
+            "@type": "Thing",
+            "name": "Privacy Policy",
+            "description": "Data protection and privacy practices"
+        },
+        "dateModified": "2025-05-24",
+        "inLanguage": "en-US"
+    }
+    </script>
+
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
 
@@ -14,26 +65,30 @@
         }
 
         :root {
-            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            --dark-bg: #0f0f23;
-            --card-bg: rgba(255, 255, 255, 0.05);
-            --text-primary: #ffffff;
-            --text-secondary: rgba(255, 255, 255, 0.8);
+            --primary-gradient: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+            --secondary-gradient: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);
+            --light-bg: #ffffff;
+            --section-bg: #f8fafc;
+            --card-bg: #ffffff;
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
             --accent-blue: #3b82f6;
-            --accent-purple: #8b5cf6;
-            --border-color: rgba(255, 255, 255, 0.1);
+            --accent-cyan: #06b6d4;
+            --border-color: #e2e8f0;
+            --shadow-light: 0 1px 3px rgba(0, 0, 0, 0.1);
+            --shadow-medium: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --shadow-large: 0 10px 25px rgba(0, 0, 0, 0.15);
         }
 
         body {
             font-family: 'Inter', sans-serif;
-            background: var(--dark-bg);
+            background: var(--light-bg);
             color: var(--text-primary);
             line-height: 1.6;
             overflow-x: hidden;
         }
 
-        /* Animated Background */
+        /* Light Animated Background */
         body::before {
             content: '';
             position: fixed;
@@ -41,14 +96,14 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(45deg, #667eea, #764ba2, #f093fb, #f5576c);
+            background: linear-gradient(45deg, #f0f9ff, #e0f2fe, #f0f9ff, #e0f2fe);
             background-size: 400% 400%;
-            animation: gradientShift 15s ease infinite;
-            opacity: 0.05;
+            animation: lightGradientShift 20s ease infinite;
+            opacity: 0.3;
             z-index: -1;
         }
 
-        @keyframes gradientShift {
+        @keyframes lightGradientShift {
             0% { background-position: 0% 50%; }
             50% { background-position: 100% 50%; }
             100% { background-position: 0% 50%; }
@@ -60,9 +115,10 @@
             top: 0;
             left: 0;
             width: 100%;
-            background: rgba(15, 15, 35, 0.9);
-            backdrop-filter: blur(20px);
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
             border-bottom: 1px solid var(--border-color);
+            box-shadow: var(--shadow-light);
             z-index: 1000;
             transition: all 0.3s ease;
         }
@@ -92,11 +148,11 @@
             justify-content: center;
             font-size: 24px;
             transition: transform 0.3s ease;
-            box-shadow: 0 4px 20px rgba(102, 126, 234, 0.3);
+            box-shadow: var(--shadow-medium);
         }
 
         .logo-circle:hover {
-            transform: scale(1.1) rotate(10deg);
+            transform: scale(1.05) rotate(5deg);
         }
 
         .nav-links {
@@ -117,8 +173,9 @@
         .nav-links a:hover,
         .nav-links a.active {
             color: var(--text-primary);
-            background: rgba(255, 255, 255, 0.1);
-            transform: translateY(-2px);
+            background: var(--section-bg);
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-light);
         }
 
         .menu-toggle {
@@ -133,7 +190,7 @@
         /* Main Content */
         .main-container {
             margin-top: 100px;
-            max-width: 1000px;
+            max-width: 900px;
             margin-left: auto;
             margin-right: auto;
             padding: 2rem;
@@ -141,11 +198,15 @@
 
         .hero-section {
             text-align: center;
-            margin-bottom: 4rem;
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: var(--section-bg);
+            border-radius: 16px;
+            box-shadow: var(--shadow-light);
         }
 
         .hero-title {
-            font-size: 3.5rem;
+            font-size: 3rem;
             font-weight: 700;
             background: var(--primary-gradient);
             -webkit-background-clip: text;
@@ -156,9 +217,9 @@
         }
 
         .hero-subtitle {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             color: var(--text-secondary);
-            max-width: 600px;
+            max-width: 500px;
             margin: 0 auto;
             animation: fadeInUp 0.8s ease 0.2s both;
         }
@@ -166,7 +227,7 @@
         @keyframes fadeInUp {
             from {
                 opacity: 0;
-                transform: translateY(30px);
+                transform: translateY(20px);
             }
             to {
                 opacity: 1;
@@ -177,18 +238,19 @@
         /* Privacy Cards */
         .privacy-section {
             display: grid;
-            gap: 2rem;
+            gap: 1.5rem;
             animation: fadeInUp 0.8s ease 0.4s both;
         }
 
         .privacy-card {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
-            border-radius: 16px;
-            padding: 2rem;
+            border-radius: 12px;
+            padding: 1.5rem;
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
+            box-shadow: var(--shadow-light);
         }
 
         .privacy-card::before {
@@ -197,7 +259,7 @@
             top: 0;
             left: 0;
             width: 100%;
-            height: 2px;
+            height: 3px;
             background: var(--primary-gradient);
             transform: translateX(-100%);
             transition: transform 0.3s ease;
@@ -208,43 +270,43 @@
         }
 
         .privacy-card:hover {
-            transform: translateY(-5px);
-            background: rgba(255, 255, 255, 0.08);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-large);
+            border-color: var(--accent-blue);
         }
 
         .card-icon {
-            width: 60px;
-            height: 60px;
-            border-radius: 12px;
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
             background: var(--primary-gradient);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 24px;
-            margin-bottom: 1.5rem;
+            font-size: 20px;
+            margin-bottom: 1rem;
+            box-shadow: var(--shadow-light);
         }
 
         .card-title {
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             font-weight: 600;
-            margin-bottom: 1rem;
+            margin-bottom: 0.8rem;
             color: var(--text-primary);
         }
 
         .card-content {
             color: var(--text-secondary);
-            line-height: 1.7;
+            line-height: 1.6;
         }
 
         .card-content ul {
-            padding-left: 1.5rem;
-            margin-top: 1rem;
+            padding-left: 1.2rem;
+            margin-top: 0.8rem;
         }
 
         .card-content li {
-            margin-bottom: 0.5rem;
-            position: relative;
+            margin-bottom: 0.4rem;
         }
 
         .card-content li::marker {
@@ -253,45 +315,34 @@
 
         /* Special Cards */
         .highlight-card {
-            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(139, 92, 246, 0.1));
-            border: 1px solid rgba(59, 130, 246, 0.3);
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.05), rgba(29, 78, 216, 0.05));
+            border: 1px solid rgba(59, 130, 246, 0.2);
         }
 
-        .warning-card {
-            background: linear-gradient(135deg, rgba(245, 87, 108, 0.1), rgba(240, 147, 251, 0.1));
-            border: 1px solid rgba(245, 87, 108, 0.3);
+        .info-card {
+            background: linear-gradient(135deg, rgba(6, 182, 212, 0.05), rgba(8, 145, 178, 0.05));
+            border: 1px solid rgba(6, 182, 212, 0.2);
         }
 
         /* Footer */
         .footer {
-            margin-top: 4rem;
+            margin-top: 3rem;
             text-align: center;
             padding: 2rem;
-            background: rgba(255, 255, 255, 0.02);
+            background: var(--section-bg);
             border-top: 1px solid var(--border-color);
-            border-radius: 16px 16px 0 0;
+            border-radius: 12px;
         }
 
         .footer-text {
             color: var(--text-secondary);
-            margin-bottom: 1rem;
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
         }
 
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            flex-wrap: wrap;
-        }
-
-        .footer-links a {
-            color: var(--accent-blue);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .footer-links a:hover {
-            color: var(--text-primary);
+        .footer-copyright {
+            color: var(--text-secondary);
+            font-size: 0.8rem;
         }
 
         /* Responsive Design */
@@ -303,13 +354,14 @@
                 right: -100%;
                 width: 280px;
                 height: 100vh;
-                background: rgba(15, 15, 35, 0.95);
-                backdrop-filter: blur(20px);
+                background: rgba(255, 255, 255, 0.98);
+                backdrop-filter: blur(10px);
                 flex-direction: column;
                 align-items: center;
                 justify-content: center;
                 gap: 2rem;
                 transition: right 0.3s ease;
+                box-shadow: var(--shadow-large);
             }
 
             .nav-links.active {
@@ -322,7 +374,7 @@
             }
 
             .hero-title {
-                font-size: 2.5rem;
+                font-size: 2.2rem;
             }
 
             .main-container {
@@ -330,18 +382,13 @@
             }
 
             .privacy-card {
-                padding: 1.5rem;
-            }
-
-            .footer-links {
-                flex-direction: column;
-                gap: 1rem;
+                padding: 1.2rem;
             }
         }
 
         @media (max-width: 480px) {
             .hero-title {
-                font-size: 2rem;
+                font-size: 1.8rem;
             }
 
             .nav-content {
@@ -352,184 +399,114 @@
                 padding: 1rem;
             }
         }
-
-        /* Floating Elements */
-        .floating-element {
-            position: absolute;
-            opacity: 0.1;
-            animation: float 6s ease-in-out infinite;
-        }
-
-        .floating-element:nth-child(1) { top: 20%; left: 10%; animation-delay: 0s; }
-        .floating-element:nth-child(2) { top: 60%; right: 10%; animation-delay: 2s; }
-        .floating-element:nth-child(3) { top: 80%; left: 20%; animation-delay: 4s; }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px) rotate(0deg); }
-            50% { transform: translateY(-20px) rotate(180deg); }
-        }
     </style>
 </head>
 <body>
-    <!-- Floating Elements -->
-    <div class="floating-element" style="font-size: 2rem;">🔒</div>
-    <div class="floating-element" style="font-size: 2rem;">🛡️</div>
-    <div class="floating-element" style="font-size: 2rem;">📋</div>
-
     <!-- Navigation -->
     <nav class="nav-container">
         <div class="nav-content">
             <div class="logo-container">
-                <a href="index.html">
+                <a href="index.html" aria-label="My Blog Home">
                     <div class="logo-circle">🤖</div>
                 </a>
             </div>
             
-            <ul class="nav-links" id="navLinks">
-                <li><a href="home.html">Home</a></li>
-                <li><a href="ai.html">AI</a></li>
-                <li><a href="create3.html">Create</a></li>
-                <li><a href="search.html">Search</a></li>
-                <li><a href="edit.html">Edit</a></li>
-                <li><a href="all2.html">Blogs</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="contact.html">Contact</a></li>
-                <li><a href="privacy.html" class="active">Privacy</a></li>
+            <ul class="nav-links" id="navLinks" role="menubar">
+                <li role="menuitem"><a href="home.html">Home</a></li>
+                <li role="menuitem"><a href="ai.html">AI</a></li>
+                <li role="menuitem"><a href="create3.html">Create</a></li>
+                <li role="menuitem"><a href="search.html">Search</a></li>
+                <li role="menuitem"><a href="edit.html">Edit</a></li>
+                <li role="menuitem"><a href="all2.html">Blogs</a></li>
+                <li role="menuitem"><a href="about.html">About</a></li>
+                <li role="menuitem"><a href="contact.html">Contact</a></li>
+                <li role="menuitem"><a href="privacy.html" class="active" aria-current="page">Privacy</a></li>
             </ul>
             
-            <button class="menu-toggle" id="menuToggle">☰</button>
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation menu">☰</button>
         </div>
     </nav>
 
     <!-- Main Content -->
-    <main class="main-container">
+    <main class="main-container" role="main">
         <!-- Hero Section -->
         <section class="hero-section">
             <h1 class="hero-title">Privacy Policy</h1>
-            <p class="hero-subtitle">Your privacy matters to us. Learn how we collect, use, and protect your personal information.</p>
+            <p class="hero-subtitle">Find out how your privacy rights are respected and how your personal information is protected.</p>
         </section>
 
         <!-- Privacy Cards -->
-        <section class="privacy-section">
-            <div class="privacy-card highlight-card">
-                <div class="card-icon">🏠</div>
-                <h2 class="card-title">Introduction</h2>
+        <section class="privacy-section" aria-label="Privacy policy sections">
+            <article class="privacy-card highlight-card">
+                <div class="card-icon" aria-hidden="true">🛡️</div>
+                <h2 class="card-title">Dedication to Data Protection</h2>
                 <div class="card-content">
-                    <p>Welcome to My Blog. We are committed to protecting your personal information and being transparent about how we collect, use, and safeguard your data. This privacy policy explains our practices regarding your personal information.</p>
+                    <p>Our dedication is in safeguarding your private data and being open and honest about our data practices.  Our service is fundamentally based on your privacy.</p>
                 </div>
-            </div>
+            </article>
 
-            <div class="privacy-card">
-                <div class="card-icon">📊</div>
-                <h2 class="card-title">Information We Collect</h2>
+            <article class="privacy-card">
+                <div class="card-icon" aria-hidden="true">📊</div>
+                <h2 class="card-title">Data That We Gather</h2>
                 <div class="card-content">
-                    <p>We collect various types of information to provide and improve our services:</p>
+                    <p>In order to deliver better services, we gather information:</p>
                     <ul>
-                        <li>Personal identification information (Name, email address, phone number)</li>
-                        <li>Demographic information and preferences</li>
-                        <li>Usage data and analytics</li>
-                        <li>Information from surveys and feedback forms</li>
-                        <li>Technical information (IP address, browser type, device information)</li>
+                        <li>Name and email are basic profile details.</li>
+                        <li>Preferences and use statistics</li>
+                        <li>Configuration information (browser type, IP address)</li>
                     </ul>
                 </div>
-            </div>
+            </article>
 
-            <div class="privacy-card">
-                <div class="card-icon">⚙️</div>
-                <h2 class="card-title">How We Use Your Information</h2>
+            <article class="privacy-card">
+                <div class="card-icon" aria-hidden="true">⚙️</div>
+                <h2 class="card-title">Our Data Utilization Methods</h2>
                 <div class="card-content">
-                    <p>Your information helps us provide better services:</p>
+                    <p>Your data is useful to us:</p>
                     <ul>
-                        <li>Personalize your user experience and content recommendations</li>
-                        <li>Improve our website functionality and user interface</li>
-                        <li>Send periodic emails and important notifications</li>
-                        <li>Respond to inquiries and provide customer support</li>
-                        <li>Analyze usage patterns to enhance our services</li>
+                        <li>Customize your encounter.</li>
+                        <li>Make our services better</li>
+                        <li>Offer customer service.</li>
+                        <li>Send out critical alerts.</li>
                     </ul>
                 </div>
-            </div>
+            </article>
 
-            <div class="privacy-card">
-                <div class="card-icon">🛡️</div>
-                <h2 class="card-title">Data Protection & Security</h2>
+            <article class="privacy-card info-card">
+                <div class="card-icon" aria-hidden="true">🍪</div>
+                <h2 class="card-title">Cookies and Monitoring</h2>
                 <div class="card-content">
-                    <p>We implement robust security measures to protect your personal information:</p>
+                    <p>Cookies are used by us to track site activity and improve your experience.  In the settings of your browser, you may modify your cookie choices.</p>
+                </div>
+            </article>
+
+            <article class="privacy-card">
+                <div class="card-icon" aria-hidden="true">⚖️</div>
+                <h2 class="card-title">The Rights You Have</h2>
+                <div class="card-content">
+                    <p>You are entitled to:</p>
                     <ul>
-                        <li>SSL encryption for all data transmission</li>
-                        <li>Regular security audits and updates</li>
-                        <li>Secure servers with limited access</li>
-                        <li>Employee training on data protection</li>
-                        <li>Compliance with industry security standards</li>
+                        <li>View your personal information</li>
+                        <li>Ask for the deletion or correction of data.</li>
+                        <li>Refuse to receive marketing messages</li>
+                        <li>The ability to transfer data</li>
                     </ul>
                 </div>
-            </div>
+            </article>
 
-            <div class="privacy-card">
-                <div class="card-icon">🍪</div>
-                <h2 class="card-title">Cookies & Tracking</h2>
+            <article class="privacy-card highlight-card">
+                <div class="card-icon" aria-hidden="true">📞</div>
+                <h2 class="card-title">Reach Out to Us</h2>
                 <div class="card-content">
-                    <p>We use cookies and similar technologies to enhance your browsing experience. These help us remember your preferences, analyze site traffic, and provide personalized content. You can control cookie settings through your browser preferences.</p>
+                    <p>Concerns with this privacy statement?  For help and clarity, get in touch with our privacy team.</p>
                 </div>
-            </div>
-
-            <div class="privacy-card warning-card">
-                <div class="card-icon">🤝</div>
-                <h2 class="card-title">Third-Party Disclosure</h2>
-                <div class="card-content">
-                    <p>We do not sell, trade, or otherwise transfer your personally identifiable information to outside parties without your explicit consent, except in the following circumstances:</p>
-                    <ul>
-                        <li>When required by law or legal process</li>
-                        <li>To protect our rights and property</li>
-                        <li>With trusted service providers under strict confidentiality agreements</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="privacy-card">
-                <div class="card-icon">⚖️</div>
-                <h2 class="card-title">Your Rights</h2>
-                <div class="card-content">
-                    <p>You have several rights regarding your personal data:</p>
-                    <ul>
-                        <li>Access and review your personal information</li>
-                        <li>Request correction of inaccurate data</li>
-                        <li>Request deletion of your data</li>
-                        <li>Opt-out of marketing communications</li>
-                        <li>Data portability and transfer rights</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="privacy-card highlight-card">
-                <div class="card-icon">✅</div>
-                <h2 class="card-title">Your Consent</h2>
-                <div class="card-content">
-                    <p>By using our website and services, you consent to our privacy policy. If you do not agree with this policy, please do not use our services. We may update this policy periodically, and continued use constitutes acceptance of any changes.</p>
-                </div>
-            </div>
-
-            <div class="privacy-card">
-                <div class="card-icon">🔄</div>
-                <h2 class="card-title">Policy Updates</h2>
-                <div class="card-content">
-                    <p>We may update our Privacy Policy from time to time to reflect changes in our practices or legal requirements. We will notify you of any significant changes by:</p>
-                    <ul>
-                        <li>Posting updates on this page</li>
-                        <li>Sending email notifications to registered users</li>
-                        <li>Displaying prominent notices on our website</li>
-                    </ul>
-                </div>
-            </div>
+            </article>
         </section>
 
         <!-- Footer -->
-        <footer class="footer">
-            <p class="footer-text">Last updated: May 2025 | For questions about this privacy policy, please contact us.</p>
-            <div class="footer-links">
-                <a href="contact.html">Contact Us</a>
-                <a href="about.html">About</a>
-                <a href="home.html">Back to Home</a>
-            </div>
+        <footer class="footer" role="contentinfo">
+            <p class="footer-text">Most recent update: May 24, 2025</p>
+            <p class="footer-copyright">My Blog, Copyright 2025. All rights reserved.</p>
         </footer>
     </main>
 
@@ -542,6 +519,7 @@
             menuToggle.addEventListener('click', function() {
                 navLinks.classList.toggle('active');
                 this.innerHTML = navLinks.classList.contains('active') ? '✕' : '☰';
+                this.setAttribute('aria-expanded', navLinks.classList.contains('active'));
             });
 
             // Close menu when clicking outside
@@ -549,31 +527,40 @@
                 if (!navLinks.contains(e.target) && !menuToggle.contains(e.target)) {
                     navLinks.classList.remove('active');
                     menuToggle.innerHTML = '☰';
+                    menuToggle.setAttribute('aria-expanded', 'false');
                 }
             });
 
-            // Smooth scrolling for navigation links
+            // Close menu when navigation link is clicked
             document.querySelectorAll('.nav-links a').forEach(link => {
-                link.addEventListener('click', (e) => {
+                link.addEventListener('click', () => {
                     navLinks.classList.remove('active');
                     menuToggle.innerHTML = '☰';
+                    menuToggle.setAttribute('aria-expanded', 'false');
                 });
             });
 
-            // Add scroll effect to navigation
+            // Navigation scroll effect
+            let lastScrollY = window.scrollY;
             window.addEventListener('scroll', function() {
                 const nav = document.querySelector('.nav-container');
-                if (window.scrollY > 50) {
-                    nav.style.background = 'rgba(15, 15, 35, 0.95)';
+                const currentScrollY = window.scrollY;
+                
+                if (currentScrollY > 50) {
+                    nav.style.background = 'rgba(255, 255, 255, 0.98)';
+                    nav.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
                 } else {
-                    nav.style.background = 'rgba(15, 15, 35, 0.9)';
+                    nav.style.background = 'rgba(255, 255, 255, 0.95)';
+                    nav.style.boxShadow = '0 1px 3px rgba(0, 0, 0, 0.1)';
                 }
+                
+                lastScrollY = currentScrollY;
             });
 
-            // Animate cards on scroll
+            // Intersection Observer for animations
             const observerOptions = {
                 threshold: 0.1,
-                rootMargin: '0px 0px -50px 0px'
+                rootMargin: '0px 0px -30px 0px'
             };
 
             const observer = new IntersectionObserver(function(entries) {
@@ -585,9 +572,20 @@
                 });
             }, observerOptions);
 
-            // Observe all privacy cards
-            document.querySelectorAll('.privacy-card').forEach(card => {
+            // Observe privacy cards for scroll animations
+            document.querySelectorAll('.privacy-card').forEach((card, index) => {
+                card.style.animationDelay = `${index * 0.1}s`;
                 observer.observe(card);
+            });
+
+            // Keyboard navigation support
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && navLinks.classList.contains('active')) {
+                    navLinks.classList.remove('active');
+                    menuToggle.innerHTML = '☰';
+                    menuToggle.setAttribute('aria-expanded', 'false');
+                    menuToggle.focus();
+                }
             });
         });
     </script>
