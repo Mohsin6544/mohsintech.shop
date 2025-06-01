@@ -1,0 +1,1202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" href="project/logo1.png" type="image/png">
+    
+    <!-- Essential Meta Tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <!-- Primary Meta Tags -->
+    <title>Edit Blog - AI Blog Platform</title>
+    <meta name="title" content="Edit Blog - AI Blog Platform">
+    <meta name="description" content="Edit and update your blog posts with our advanced editor">
+    <meta name="keywords" content="edit blog, update blog, blog editor, content management">
+    <meta name="author" content="AI Blog Platform">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        /* Navigation styles */
+        .nav-container {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6, #d946ef);
+            background-size: 300% 300%;
+            animation: gradientBG 15s ease infinite;
+            padding: 20px 0;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo-circle {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            border: 2px solid #ccc;
+            transition: transform 0.3s ease;
+        }
+
+        .logo-circle:hover {
+            transform: scale(1.1);
+        }
+        
+        .nav-menu {
+            display: flex;
+            align-items: center;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 10px 20px;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            opacity: 0.9;
+        }
+        
+        .nav-links a:hover,
+        .nav-links a.active {
+            opacity: 1;
+            background-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        /* Main Container */
+        .main-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        /* Page Header */
+        .page-header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 25px;
+            padding: 40px;
+            text-align: center;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .page-header h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 15px;
+        }
+
+        .page-header p {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        /* Blog Selection */
+        .blog-selection {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .selection-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .selection-header h2 {
+            color: #333;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .refresh-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: transform 0.3s ease;
+        }
+
+        .refresh-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .blog-search {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .blog-search input {
+            width: 100%;
+            padding: 15px 50px 15px 20px;
+            border: 2px solid #e9ecef;
+            border-radius: 15px;
+            font-size: 16px;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        .blog-search input:focus {
+            border-color: #667eea;
+        }
+
+        .search-icon {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #999;
+            font-size: 18px;
+        }
+
+        .blogs-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 20px;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .blog-item {
+            background: #f8f9fa;
+            border: 2px solid transparent;
+            border-radius: 15px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .blog-item:hover {
+            border-color: #667eea;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .blog-item.selected {
+            border-color: #667eea;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .blog-item-header {
+            display: flex;
+            justify-content: between;
+            align-items: flex-start;
+            margin-bottom: 10px;
+        }
+
+        .blog-item-id {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 4px 8px;
+            border-radius: 8px;
+            font-size: 11px;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .blog-item-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            line-height: 1.3;
+        }
+
+        .blog-item-meta {
+            font-size: 12px;
+            opacity: 0.8;
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .blog-item-excerpt {
+            font-size: 13px;
+            opacity: 0.9;
+            line-height: 1.4;
+            margin-top: 10px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        /* Editor Section */
+        .editor-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            display: none;
+        }
+
+        .editor-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #f1f3f4;
+        }
+
+        .editor-header h2 {
+            color: #333;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .editor-actions {
+            display: flex;
+            gap: 15px;
+        }
+
+        .action-btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: transform 0.3s ease;
+        }
+
+        .save-btn {
+            background: linear-gradient(135deg, #28a745, #20c997);
+            color: white;
+        }
+
+        .cancel-btn {
+            background: #6c757d;
+            color: white;
+        }
+
+        .delete-btn {
+            background: linear-gradient(135deg, #dc3545, #e74c3c);
+            color: white;
+        }
+
+        .action-btn:hover {
+            transform: scale(1.05);
+        }
+
+        /* Form Styles */
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-label {
+            display: block;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            font-size: 16px;
+            outline: none;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-input:focus {
+            border-color: #667eea;
+        }
+
+        .form-textarea {
+            width: 100%;
+            min-height: 300px;
+            padding: 15px;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            font-size: 16px;
+            outline: none;
+            transition: border-color 0.3s ease;
+            resize: vertical;
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+        }
+
+        .form-textarea:focus {
+            border-color: #667eea;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .form-select {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            font-size: 16px;
+            outline: none;
+            transition: border-color 0.3s ease;
+            background: white;
+        }
+
+        .form-select:focus {
+            border-color: #667eea;
+        }
+
+        /* Character Counter */
+        .char-counter {
+            text-align: right;
+            font-size: 12px;
+            color: #999;
+            margin-top: 5px;
+        }
+
+        .char-counter.warning {
+            color: #ffc107;
+        }
+
+        .char-counter.danger {
+            color: #dc3545;
+        }
+
+        /* Loading and Status */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid #fff;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .status-message {
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .status-success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .status-error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .status-warning {
+            background: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeaa7;
+        }
+
+        /* Preview Mode */
+        .preview-mode {
+            background: #f8f9fa;
+            border: 2px dashed #dee2e6;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .preview-mode h3 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.2rem;
+        }
+
+        .preview-content {
+            line-height: 1.6;
+            color: #555;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 280px;
+                height: 100vh;
+                background: linear-gradient(135deg, #6366f1, #8b5cf6, #d946ef);
+                flex-direction: column;
+                align-items: center;
+                padding: 80px 0 30px;
+                box-shadow: -5px 0 25px rgba(0, 0, 0, 0.15);
+                transition: all 0.5s ease;
+                z-index: 100;
+            }
+
+            .nav-links.active {
+                display: flex;
+                right: 0;
+            }
+
+            .menu-toggle {
+                display: block;
+                z-index: 101;
+            }
+
+            .main-container {
+                padding: 20px 15px;
+            }
+
+            .page-header h1 {
+                font-size: 2rem;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .blogs-list {
+                grid-template-columns: 1fr;
+            }
+
+            .editor-actions {
+                flex-direction: column;
+            }
+
+            .selection-header {
+                flex-direction: column;
+                gap: 15px;
+                align-items: flex-start;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .editor-section {
+            animation: fadeIn 0.5s ease forwards;
+        }
+
+        .blog-item {
+            animation: fadeIn 0.3s ease forwards;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <div class="nav-container">
+        <div class="nav-content">
+            <div class="logo-container">
+                <a href="index.html"><div class="logo-circle">🤖</div></a>
+            </div>
+            
+            <div class="nav-menu">
+                <ul class="nav-links" id="navLinks">
+                    <li><a href="home.html">Home</a></li>
+                    <li><a href="ai.html">AI</a></li>
+                    <li><a href="create.html">Create</a></li>
+                    <li><a href="search.html">Search</a></li>
+                    <li><a href="edit.html" class="active">Edit</a></li>
+                    <li><a href="all.html">Blogs</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="privacy.html">Privacy</a></li>
+                </ul>
+                
+                <button class="menu-toggle" id="menuToggle">☰</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="main-container">
+        <!-- Page Header -->
+        <div class="page-header">
+            <h1>✏️ Edit Blog</h1>
+            <p>Select and modify your blog posts with our advanced editor</p>
+        </div>
+
+        <!-- Status Messages -->
+        <div class="status-message" id="statusMessage"></div>
+
+        <!-- Blog Selection -->
+        <div class="blog-selection">
+            <div class="selection-header">
+                <h2>📝 Select Blog to Edit</h2>
+                <button class="refresh-btn" id="refreshBlogs">🔄 Refresh</button>
+            </div>
+            
+            <div class="blog-search">
+                <input type="text" id="blogSearchInput" placeholder="Search your blogs by title, category, or content...">
+                <span class="search-icon">🔍</span>
+            </div>
+            
+            <div class="blogs-list" id="blogsList">
+                <div style="text-align: center; padding: 40px; color: #666;">
+                    <div class="loading-spinner" style="margin: 0 auto 20px;"></div>
+                    <p>Loading your blogs...</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Editor Section -->
+        <div class="editor-section" id="editorSection">
+            <div class="editor-header">
+                <h2>✏️ Edit Blog Post</h2>
+                <div class="editor-actions">
+                    <button class="action-btn save-btn" id="saveBlog">💾 Save Changes</button>
+                    <button class="action-btn cancel-btn" id="cancelEdit">❌ Cancel</button>
+                    <button class="action-btn delete-btn" id="deleteBlog">🗑️ Delete</button>
+                </div>
+            </div>
+
+            <form id="editForm">
+                <div class="form-group">
+                    <label class="form-label" for="editTitle">Blog Title *</label>
+                    <input type="text" class="form-input" id="editTitle" required>
+                    <div class="char-counter" id="titleCounter">0/100 characters</div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label" for="editCategory">Category *</label>
+                        <select class="form-select" id="editCategory" required>
+                            <option value="">Select Category</option>
+                            <option value="technology">Technology</option>
+                            <option value="health">Health & Fitness</option>
+                            <option value="travel">Travel</option>
+                            <option value="business">Business</option>
+                            <option value="lifestyle">Lifestyle</option>
+                            <option value="education">Education</option>
+                            <option value="entertainment">Entertainment</option>
+                            <option value="sports">Sports</option>
+                            <option value="food">Food & Cooking</option>
+                            <option value="science">Science</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="editReadTime">Reading Time (minutes)</label>
+                        <input type="number" class="form-input" id="editReadTime" min="1" max="60" value="5">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="editTags">Tags (comma separated)</label>
+                    <input type="text" class="form-input" id="editTags" placeholder="e.g., technology, ai, programming">
+                    <div class="char-counter" id="tagsCounter">0/200 characters</div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="editContent">Blog Content *</label>
+                    <textarea class="form-textarea" id="editContent" required placeholder="Write your blog content here..."></textarea>
+                    <div class="char-counter" id="contentCounter">0 characters</div>
+                </div>
+
+                <!-- Preview Section -->
+                <div class="preview-mode" id="previewMode" style="display: none;">
+                    <h3>📖 Preview</h3>
+                    <div class="preview-content" id="previewContent"></div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-spinner"></div>
+    </div>
+
+    <script>
+        // GitHub Configuration
+        const GITHUB_CONFIG = {
+            token: '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',
+            gistId: 'bae74f429d35217f7be1ab32cbb1b861',
+            headers: {
+                'Authorization': 'Bearer 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',
+                'Content-Type': 'application/json',
+                'Accept': 'application/vnd.github.v3+json'
+            }
+        };
+
+        // Global variables
+        let allBlogs = [];
+        let selectedBlog = null;
+        let isEditing = false;
+
+        // DOM Elements
+        const blogsList = document.getElementById('blogsList');
+        const editorSection = document.getElementById('editorSection');
+        const statusMessage = document.getElementById('statusMessage');
+        const loadingOverlay = document.getElementById('loadingOverlay');
+        const blogSearchInput = document.getElementById('blogSearchInput');
+        const refreshBlogs = document.getElementById('refreshBlogs');
+        const editForm = document.getElementById('editForm');
+        const saveBlog = document.getElementById('saveBlog');
+        const cancelEdit = document.getElementById('cancelEdit');
+        const deleteBlog = document.getElementById('deleteBlog');
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+
+        // Form elements
+        const editTitle = document.getElementById('editTitle');
+        const editCategory = document.getElementById('editCategory');
+        const editReadTime = document.getElementById('editReadTime');
+        const editTags = document.getElementById('editTags');
+        const editContent = document.getElementById('editContent');
+
+        // Character counters
+        const titleCounter = document.getElementById('titleCounter');
+        const tagsCounter = document.getElementById('tagsCounter');
+        const contentCounter = document.getElementById('contentCounter');
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            setupEventListeners();
+            loadBlogs();
+        });
+
+        function setupEventListeners() {
+            // Mobile menu
+            menuToggle.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+            });
+
+            // Search blogs
+            blogSearchInput.addEventListener('input', filterBlogs);
+            
+            // Refresh blogs
+            refreshBlogs.addEventListener('click', loadBlogs);
+
+            // Editor actions
+            saveBlog.addEventListener('click', saveChanges);
+            cancelEdit.addEventListener('click', cancelEditing);
+            deleteBlog.addEventListener('click', deleteBlogPost);
+
+            // Character counters
+            editTitle.addEventListener('input', () => updateCharCounter(editTitle, titleCounter, 100));
+            editTags.addEventListener('input', () => updateCharCounter(editTags, tagsCounter, 200));
+            editContent.addEventListener('input', () => updateCharCounter(editContent, contentCounter));
+
+            // Auto-save draft (optional)
+            setInterval(saveDraft, 30000); // Save draft every 30 seconds
+        }
+
+        async function loadBlogs() {
+            try {
+                showLoading();
+                hideStatus();
+                
+                const response = await fetch(`https://api.github.com/gists/${GITHUB_CONFIG.gistId}`, {
+                    headers: GITHUB_CONFIG.headers
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                const gistData = await response.json();
+                const blogsFile = gistData.files['blogs.json'];
+                
+                if (blogsFile && blogsFile.content) {
+                    allBlogs = JSON.parse(blogsFile.content);
+                    displayBlogs(allBlogs);
+                } else {
+                    throw new Error('blogs.json file not found');
+                }
+
+                hideLoading();
+                
+            } catch (error) {
+                console.error('Error loading blogs:', error);
+                hideLoading();
+                showStatus('Error loading blogs. Please check your connection and try again.', 'error');
+            }
+        }
+
+        function displayBlogs(blogs) {
+            if (!blogs || blogs.length === 0) {
+                blogsList.innerHTML = `
+                    <div style="text-align: center; padding: 40px; color: #666;">
+                        <h3>📝 No Blogs Found</h3>
+                        <p>You haven't created any blogs yet.</p>
+                        <a href="create.html" style="color: #667eea; text-decoration: none;">Create your first blog →</a>
+                    </div>
+                `;
+                return;
+            }
+
+            blogsList.innerHTML = '';
+            
+            blogs.forEach(blog => {
+                const blogItem = createBlogItem(blog);
+                blogsList.appendChild(blogItem);
+            });
+        }
+
+        function createBlogItem(blog) {
+            const item = document.createElement('div');
+            item.className = 'blog-item';
+            item.setAttribute('data-blog-id', blog.id);
+            
+            const createdDate = new Date(blog.created_at || blog.date || Date.now());
+            const formattedDate = createdDate.toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'short',
+                day: 'numeric'
+            });
+            
+            const excerpt = blog.content ? 
+                blog.content.substring(0, 100) + (blog.content.length > 100 ? '...' : '') : 
+                'No content available';
+
+            item.innerHTML = `
+                <div class="blog-item-header">
+                    <div class="blog-item-id">#${blog.id}</div>
+                </div>
+                <div class="blog-item-title">${blog.title}</div>
+                <div class="blog-item-meta">
+                    <span>📂 ${blog.category || 'General'}</span>
+                    <span>⏱️ ${blog.time || 5} min</span>
+                    <span>📅 ${formattedDate}</span>
+                </div>
+                <div class="blog-item-excerpt">${excerpt}</div>
+            `;
+
+            item.addEventListener('click', () => selectBlog(blog));
+            
+            return item;
+        }
+
+        function selectBlog(blog) {
+            selectedBlog = blog;
+            
+            // Update UI
+            document.querySelectorAll('.blog-item').forEach(item => {
+                item.classList.remove('selected');
+            });
+            
+            document.querySelector(`[data-blog-id="${blog.id}"]`).classList.add('selected');
+            
+            // Populate form
+            editTitle.value = blog.title || '';
+            editCategory.value = blog.category || '';
+            editReadTime.value = blog.time || 5;
+            editTags.value = blog.tags || '';
+            editContent.value = blog.content || '';
+            
+            // Update character counters
+            updateCharCounter(editTitle, titleCounter, 100);
+            updateCharCounter(editTags, tagsCounter, 200);
+            updateCharCounter(editContent, contentCounter);
+            
+            // Show editor
+            editorSection.style.display = 'block';
+            editorSection.scrollIntoView({ behavior: 'smooth' });
+            
+            isEditing = true;
+        }
+
+        function filterBlogs() {
+            const searchTerm = blogSearchInput.value.toLowerCase().trim();
+            
+            if (!searchTerm) {
+                displayBlogs(allBlogs);
+                return;
+            }
+            
+            const filteredBlogs = allBlogs.filter(blog => 
+                blog.title.toLowerCase().includes(searchTerm) ||
+                (blog.category || '').toLowerCase().includes(searchTerm) ||
+                (blog.content || '').toLowerCase().includes(searchTerm) ||
+                (blog.tags || '').toLowerCase().includes(searchTerm)
+            );
+            
+            displayBlogs(filteredBlogs);
+        }
+
+        async function saveChanges() {
+            if (!selectedBlog || !validateForm()) {
+                return;
+            }
+            
+            try {
+                showLoading();
+                
+                // Update blog data
+                const updatedBlog = {
+                    ...selectedBlog,
+                    title: editTitle.value.trim(),
+                    category: editCategory.value,
+                    time: parseInt(editReadTime.value) || 5,
+                    tags: editTags.value.trim(),
+                    content: editContent.value.trim(),
+                    updated_at: new Date().toISOString()
+                };
+                // Find and update the blog in the array
+                const blogIndex = allBlogs.findIndex(blog => blog.id === selectedBlog.id);
+                if (blogIndex !== -1) {
+                    allBlogs[blogIndex] = updatedBlog;
+                }
+                
+                // Update GitHub Gist
+                const gistData = {
+                    files: {
+                        'blogs.json': {
+                            content: JSON.stringify(allBlogs, null, 2)
+                        }
+                    }
+                };
+                
+                const response = await fetch(`https://api.github.com/gists/${GITHUB_CONFIG.gistId}`, {
+                    method: 'PATCH',
+                    headers: GITHUB_CONFIG.headers,
+                    body: JSON.stringify(gistData)
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                hideLoading();
+                showStatus('Blog updated successfully! ✅', 'success');
+                
+                // Refresh the blogs list
+                displayBlogs(allBlogs);
+                
+                // Update selected blog reference
+                selectedBlog = updatedBlog;
+                
+            } catch (error) {
+                console.error('Error saving blog:', error);
+                hideLoading();
+                showStatus('Error saving blog. Please try again.', 'error');
+            }
+        }
+
+        async function deleteBlogPost() {
+            if (!selectedBlog) {
+                return;
+            }
+            
+            const confirmDelete = confirm(`Are you sure you want to delete "${selectedBlog.title}"? This action cannot be undone.`);
+            
+            if (!confirmDelete) {
+                return;
+            }
+            
+            try {
+                showLoading();
+                
+                // Remove blog from array
+                allBlogs = allBlogs.filter(blog => blog.id !== selectedBlog.id);
+                
+                // Update GitHub Gist
+                const gistData = {
+                    files: {
+                        'blogs.json': {
+                            content: JSON.stringify(allBlogs, null, 2)
+                        }
+                    }
+                };
+                
+                const response = await fetch(`https://api.github.com/gists/${GITHUB_CONFIG.gistId}`, {
+                    method: 'PATCH',
+                    headers: GITHUB_CONFIG.headers,
+                    body: JSON.stringify(gistData)
+                });
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                hideLoading();
+                showStatus('Blog deleted successfully! 🗑️', 'success');
+                
+                // Reset editor
+                cancelEditing();
+                
+                // Refresh blogs list
+                displayBlogs(allBlogs);
+                
+            } catch (error) {
+                console.error('Error deleting blog:', error);
+                hideLoading();
+                showStatus('Error deleting blog. Please try again.', 'error');
+            }
+        }
+
+        function cancelEditing() {
+            selectedBlog = null;
+            isEditing = false;
+            
+            // Clear form
+            editForm.reset();
+            
+            // Hide editor
+            editorSection.style.display = 'none';
+            
+            // Remove selection from blogs
+            document.querySelectorAll('.blog-item').forEach(item => {
+                item.classList.remove('selected');
+            });
+            
+            // Reset character counters
+            updateCharCounter(editTitle, titleCounter, 100);
+            updateCharCounter(editTags, tagsCounter, 200);
+            updateCharCounter(editContent, contentCounter);
+        }
+
+        function validateForm() {
+            const title = editTitle.value.trim();
+            const category = editCategory.value;
+            const content = editContent.value.trim();
+            
+            if (!title) {
+                showStatus('Please enter a blog title.', 'error');
+                editTitle.focus();
+                return false;
+            }
+            
+            if (title.length > 100) {
+                showStatus('Blog title is too long (max 100 characters).', 'error');
+                editTitle.focus();
+                return false;
+            }
+            
+            if (!category) {
+                showStatus('Please select a category.', 'error');
+                editCategory.focus();
+                return false;
+            }
+            
+            if (!content) {
+                showStatus('Please enter blog content.', 'error');
+                editContent.focus();
+                return false;
+            }
+            
+            if (editTags.value.length > 200) {
+                showStatus('Tags are too long (max 200 characters).', 'error');
+                editTags.focus();
+                return false;
+            }
+            
+            return true;
+        }
+
+        function updateCharCounter(input, counter, maxLength = null) {
+            const length = input.value.length;
+            
+            if (maxLength) {
+                counter.textContent = `${length}/${maxLength} characters`;
+                
+                if (length > maxLength * 0.9) {
+                    counter.className = 'char-counter danger';
+                } else if (length > maxLength * 0.7) {
+                    counter.className = 'char-counter warning';
+                } else {
+                    counter.className = 'char-counter';
+                }
+            } else {
+                counter.textContent = `${length} characters`;
+                counter.className = 'char-counter';
+            }
+        }
+
+        function showStatus(message, type) {
+            statusMessage.textContent = message;
+            statusMessage.className = `status-message status-${type}`;
+            statusMessage.style.display = 'block';
+            
+            // Auto hide after 5 seconds
+            setTimeout(() => {
+                hideStatus();
+            }, 5000);
+        }
+
+        function hideStatus() {
+            statusMessage.style.display = 'none';
+        }
+
+        function showLoading() {
+            loadingOverlay.style.display = 'flex';
+        }
+
+        function hideLoading() {
+            loadingOverlay.style.display = 'none';
+        }
+
+        function saveDraft() {
+            if (!isEditing || !selectedBlog) {
+                return;
+            }
+            
+            const draftData = {
+                id: selectedBlog.id,
+                title: editTitle.value.trim(),
+                category: editCategory.value,
+                time: parseInt(editReadTime.value) || 5,
+                tags: editTags.value.trim(),
+                content: editContent.value.trim(),
+                timestamp: Date.now()
+            };
+            
+            // Save to localStorage as draft
+            try {
+                localStorage.setItem(`blog_draft_${selectedBlog.id}`, JSON.stringify(draftData));
+            } catch (error) {
+                console.log('Draft save failed:', error);
+            }
+        }
+
+        function loadDraft(blogId) {
+            try {
+                const draftData = localStorage.getItem(`blog_draft_${blogId}`);
+                if (draftData) {
+                    const draft = JSON.parse(draftData);
+                    const draftAge = Date.now() - draft.timestamp;
+                    
+                    // Only load drafts that are less than 24 hours old
+                    if (draftAge < 24 * 60 * 60 * 1000) {
+                        const loadDraft = confirm('Found a saved draft for this blog. Would you like to load it?');
+                        if (loadDraft) {
+                            editTitle.value = draft.title || '';
+                            editCategory.value = draft.category || '';
+                            editReadTime.value = draft.time || 5;
+                            editTags.value = draft.tags || '';
+                            editContent.value = draft.content || '';
+                            
+                            updateCharCounter(editTitle, titleCounter, 100);
+                            updateCharCounter(editTags, tagsCounter, 200);
+                            updateCharCounter(editContent, contentCounter);
+                        }
+                    } else {
+                        // Remove old draft
+                        localStorage.removeItem(`blog_draft_${blogId}`);
+                    }
+                }
+            } catch (error) {
+                console.log('Draft load failed:', error);
+            }
+        }
+
+        // Add keyboard shortcuts
+        document.addEventListener('keydown', function(event) {
+            if (!isEditing) return;
+            
+            // Ctrl+S or Cmd+S to save
+            if ((event.ctrlKey || event.metaKey) && event.key === 's') {
+                event.preventDefault();
+                saveChanges();
+            }
+            
+            // Escape to cancel
+            if (event.key === 'Escape') {
+                event.preventDefault();
+                cancelEditing();
+            }
+        });
+
+        // Warning before leaving with unsaved changes
+        window.addEventListener('beforeunload', function(event) {
+            if (isEditing) {
+                event.preventDefault();
+                event.returnValue = 'You have unsaved changes. Are you sure you want to leave?';
+                return 'You have unsaved changes. Are you sure you want to leave?';
+            }
+        });
+    </script>
+</body>
+</html>
